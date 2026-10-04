@@ -360,7 +360,6 @@ document.addEventListener("keydown",function(e){if(/INPUT|TEXTAREA/.test(e.targe
 function auth(){stop();who.innerHTML="";
 app.innerHTML='<h1>Guvohnoma testlari</h1><p>Login va parol bilan kiring.</p><div class="strip">'+["stop","yield","speed","noentry","pedx","main"].map(function(k){return '<span>'+G[k]+'</span>'}).join("")+'</div>'+
 '<div class="card"><form id="f"><label for="e">Login</label><input id="e" autocomplete="username" autocapitalize="none" spellcheck="false"><label for="p">Parol</label><input id="p" type="password" autocomplete="current-password"><label class="small"><input type="checkbox" id="sp" style="width:auto;margin:0 6px 0 0">Parolni ko\'rsatish</label><div class="err" id="er" role="alert"></div><button class="pri">Kirish</button></form></div>'+
-'<div class="card"><h2>Login va parolingiz yo\'qmi?</h2><p>1 oylik kirish: <b>19 000 so\'m</b></p><ol class="steps"><li>Telegramda <b>@rustamoveu</b> ga yozing, to\'lov rekvizitlarini so\'rang.</li><li>To\'lovni qiling va chek skrinshotini yuboring.</li><li>Sizga login va parol beriladi (1 oy amal qiladi).</li></ol><a class="pri" href="https://t.me/rustamoveu" target="_blank" rel="noopener">Telegramda yozish</a></div>'+
 '<button class="ghost wide" id="demo">Ro\'yxatsiz 5 ta savol sinash</button>';
 document.getElementById("demo").onclick=function(){run({key:"demo",title:"Bepul sinov",qs:shuf(Q).slice(0,5),save:false})};
 document.getElementById("sp").onchange=function(){document.getElementById("p").type=this.checked?"text":"password"};
@@ -456,7 +455,6 @@ qs.forEach(function(q){var ix=u.wrong.indexOf(q.id),b=bad.indexOf(q.id)>-1;if(b&
 var td=new Date().toDateString();if(u.last!=td){u.streak=u.last==new Date(Date.now()-864e5).toDateString()?(u.streak||0)+1:1;u.last=td}
 u.today={d:td,n:(u.today&&u.today.d==td?u.today.n:0)+qs.length};u.hist.push({t:c.title,p:p,d:new Date().toLocaleDateString("uz-UZ")});u.hist=u.hist.slice(-30);save(m.e,u)}
 var h='<div class="card" style="text-align:center"><div class="ring" style="--p:'+p+';--rc:var(--'+(pass?'ok':'bad')+');--rb:var(--card);margin:4px auto 12px;--z:120px"><b style="font-size:28px">'+p+'%</b></div><h2>'+(pass?"🎉 O'tdingiz":"💪 Hali o'tmadingiz")+'</h2><p>'+(qs.length-w)+" ta to'g'ri, "+w+' ta xato.'+(c.exam?" O'tish uchun 2 tadan ko'p bo'lmagan xato.":" O'tish uchun 80% kerak.")+'</p>';
-if(!c.save)h+='<p>To\'liq kirish: @rustamoveu, 1 oy 19 000 so\'m.</p>';
 var rv='';qs.forEach(function(q){if(bad.indexOf(q.id)>-1){rv+='<div class="expl" style="text-align:left"><b>'+esc(q.q)+'</b><br>To\'g\'ri javob: '+esc(q.o.filter(function(x){return x.r})[0].t)+'</div>'}});
 if(rv)h+='<h2>Xatolar tahlili</h2>'+rv;
 h+='<button class="wide" id="rt" style="margin-top:10px">Qayta urinish</button><button class="pri" id="bk" style="margin-top:6px">'+(c.save?"Bosh sahifaga":"Kirish sahifasiga")+'</button></div>';
