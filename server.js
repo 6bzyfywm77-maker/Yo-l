@@ -7,8 +7,9 @@ const save=()=>{fs.writeFileSync(DB+'.tmp',JSON.stringify(db));fs.renameSync(DB+
 const hp=(p,s=crypto.randomBytes(16).toString('hex'))=>({s,h:crypto.scryptSync(p,s,32).toString('hex')});
 const eq=(a,b)=>a.length===b.length&&crypto.timingSafeEqual(Buffer.from(a),Buffer.from(b));
 const ck=(p,o)=>eq(hp(p,o.s).h,o.h);
-if(!db.admin){const au=process.env.ADMIN_USER||'admin',ap=process.env.ADMIN_PASS||crypto.randomBytes(5).toString('hex');db.admin={u:au,...hp(ap)};save();console.log(`\n=== ADMIN: login "${au}" parol "${ap}" (panelda o'zgartiring) ===\n`)}
-if(process.env.NEW_ADMIN_PASS){db.admin={u:db.admin.u,...hp(process.env.NEW_ADMIN_PASS)};save();console.log('Admin paroli yangilandi')}
+const EU=(process.env.ADMIN_USER||'').trim().toLowerCase(),EP=(process.env.ADMIN_PASS||'').trim();
+if(EU&&EP){db.admin={u:EU,...hp(EP)};save();console.log('Admin Render sozlamalaridan olindi: login "'+EU+'"')}
+else if(!db.admin){const ap=crypto.randomBytes(5).toString('hex');db.admin={u:'admin',...hp(ap)};save();console.log(`\n=== ADMIN: login "admin" parol "${ap}" ===\n`)}
 const sign=x=>crypto.createHmac('sha256',db.secret).update(x).digest('base64url');
 const mk=(u,r,x)=>{const b=Buffer.from(JSON.stringify({u,r,x})).toString('base64url');return b+'.'+sign(b)};
 const auth=req=>{const [b,g]=(req.headers.authorization||'').slice(7).split('.');if(!g||!eq(sign(b),g))return null;try{const o=JSON.parse(Buffer.from(b,'base64url'));if(o.x<Date.now())return null;if(o.r==='user'){const u=db.users[o.u];if(!u||u.exp<Date.now())return null}return o}catch{return null}};
@@ -28,7 +29,7 @@ if(p==='/api/login'&&m==='POST'){
 const ip=req.socket.remoteAddress,l=lim.get(ip)||{n:0,t:0};
 if(l.t>Date.now())return J(res,429,{error:"Ko'p urinish. Birozdan keyin urining."});
 const nm=String(b.u||'').trim().toLowerCase(),pw=String(b.p||'');let role=null,rec=null;
-if(nm===db.admin.u){if(ck(pw,db.admin))role='admin'}else if(db.users[nm]&&ck(pw,db.users[nm])){role='user';rec=db.users[nm]}
+if(nm===db.admin.u.toLowerCase()){if(ck(pw,db.admin))role='admin'}else if(db.users[nm]&&ck(pw,db.users[nm])){role='user';rec=db.users[nm]}
 if(!role){l.n++;if(l.n>=5)l.t=Date.now()+30000*Math.min(l.n-4,10);lim.set(ip,l);return J(res,401,{error:"Login yoki parol noto'g'ri."})}
 if(rec&&rec.exp<Date.now())return J(res,403,{error:'Muddati tugagan. Yangilash uchun adminga yozing.'});
 lim.delete(ip);const exp=rec?rec.exp:Date.now()+12*36e5;
