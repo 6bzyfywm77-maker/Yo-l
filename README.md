@@ -19,6 +19,10 @@ Birinchi ishga tushganda konsolda **admin login va paroli** chiqadi (`ADMIN_USER
 - **Internetdan:** Render / Railway / VPS ga joylang (Start: `node server.js`) va doimiy disk (`DATA_DIR`) ulang, aks holda ma'lumotlar o'chib ketadi. Vaqtincha uchun: `cloudflared tunnel --url http://localhost:3000`.
 - Internetga ochishda HTTPS ishlating (hosting buni o'zi beradi).
 
+## Belgilar bazasi va chorrahalar
+`L` massivi: `[id, guruh, nom, svg]`: 139 ta belgi, 7 guruh (ogohlantiruvchi, imtiyozli, taqiqlovchi, buyuruvchi, axborot, servis, qo'shimcha). Har bir belgi uchun "Bu belgi nimani bildiradi?" savoli avtomatik yaratiladi. Yangi belgi qo'shish uchun `L` ga qator qo'shing.
+`SC` massivi: `[[[yo'l, harakat, rang, belgi?]...], g'olib rang, izoh]`. Yo'l 0..3 (pastdan soat strelkasi bo'yicha), harakat `s` to'g'ri, `l` chapga, `r` o'ngga; belgi: `main`, `yield`, `stop`, `lampg`, `lampr`.
+
 ## Savollar
 Savollar `index.html` ichidagi `Q` massivida: `[bo'lim, savol, [to'g'ri, xato, xato], izoh, belgi]`. Birinchi variant to'g'ri, ko'rsatishda aralashtiriladi.
 
