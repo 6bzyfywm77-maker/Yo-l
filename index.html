@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YO'L TEST</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#EEF2F6;--card:#fff;--ink:#14202E;--mut:#5A6878;--blue:#0A4DA2;--yel:#FFC72C;--ok:#1E8E5A;--bad:#C8372D;--line:#D5DCE5;--fs:1}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1620;--card:#18222F;--ink:#E8EEF5;--mut:#9AA9BA;--blue:#2F6FD0;--ok:#35B07A;--bad:#E8574C;--line:#2A3646}}
+:root[data-theme="dark"]{--bg:#0F1620;--card:#18222F;--ink:#E8EEF5;--mut:#9AA9BA;--blue:#2F6FD0;--ok:#35B07A;--bad:#E8574C;--line:#2A3646}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 calc(15px*var(--fs))/1.45 Rubik,system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:520px;margin:0 auto;padding:12px}
+.top{background:var(--blue);color:#fff;padding:8px 14px;position:relative}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:repeating-linear-gradient(90deg,var(--yel) 0 20px,transparent 20px 34px)}
+.top .in{max-width:520px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.logo{font-weight:800;font-size:18px}.logo::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--yel);margin-right:7px}
+button{font:inherit;cursor:pointer;border:0;border-radius:9px;padding:10px 14px;min-height:42px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+.pri{background:var(--yel);color:#14202E;font-weight:700;width:100%;box-shadow:0 2px 0 #B58900}
+a.pri{display:block;text-align:center;text-decoration:none;padding:12px;border-radius:9px}
+.ghost{background:transparent;color:inherit;border:1px solid currentColor;padding:4px 10px;min-height:32px;font-size:13px}
+.wide{width:100%;margin:4px 0;color:var(--ink);font-size:14px}
+.sm{background:var(--blue);color:#fff;padding:6px 12px;min-height:34px;font-size:13px;font-weight:600}
+.sm:disabled{background:var(--line);color:var(--mut);cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+h1{font-size:24px;margin:4px 0;font-weight:800}h2{font-size:16px;margin:0}
+p{margin:2px 0 8px;color:var(--mut);font-size:14px}
+input,textarea{width:100%;font:inherit;font-size:16px;padding:10px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:3px 0 8px}
+textarea{font:12px/1.4 monospace;min-height:70px}
+label{font-size:13px;font-weight:500}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.pill.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--yel)}
+.err{color:var(--bad);font-size:13px;min-height:18px}.small{font-size:12px;color:var(--mut)}
+.strip{display:flex;gap:6px;margin:8px 0}.strip span{flex:1}.strip svg{width:100%;max-width:52px}
+.li{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;margin:7px 0}.li.lock{opacity:.6}
+.nd{width:28px;height:28px;border-radius:50%;border:2px solid var(--blue);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}.nd.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.tx{flex:1;min-width:0}.tx b{display:block;line-height:1.2}.tx span{font-size:12px;color:var(--mut)}
+.ring{width:var(--z,88px);height:var(--z,88px);border-radius:50%;background:conic-gradient(var(--rc,var(--yel)) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none;position:relative}
+.ring::before{content:"";position:absolute;inset:12%;border-radius:50%;background:var(--rb,var(--bg))}.ring b{position:relative;font-weight:800}
+.hello{display:flex;gap:12px;align-items:center;margin:2px 0 8px}
+.sign{background:var(--bg);border-radius:10px;padding:8px;margin:6px 0 10px;display:flex;justify-content:center}.sign svg{width:120px;height:120px}
+.opt{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:var(--card);color:var(--ink);border:2px solid var(--line);margin:6px 0;padding:10px 12px}
+.lt{font-style:normal;font-weight:800;width:26px;height:26px;border-radius:7px;background:var(--bg);display:grid;place-items:center;flex:none;font-size:13px}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--card))}
+.opt.sel{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 15%,var(--card))}
+.expl{background:var(--bg);border-left:4px solid var(--yel);padding:8px 10px;border-radius:6px;margin:8px 0;font-size:14px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.chip{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:6px 12px;min-height:34px;white-space:nowrap;font-size:13px}.chip.on{background:var(--blue);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center}figure svg{width:84px;height:84px}figcaption{font-size:12px;margin-top:6px}
+.map{display:flex;flex-wrap:wrap;gap:5px}.dot{width:34px;min-height:34px;padding:0;background:var(--bg);color:var(--ink);border:1px solid var(--line);font-size:13px}.dot.dn{background:var(--blue);color:#fff}.dot.cur{outline:3px solid var(--yel)}
+ol.steps{padding-left:20px;margin:6px 0 12px;font-size:14px}
+pre{background:var(--bg);border-left:4px solid var(--ok);padding:8px 10px;border-radius:6px;font-size:14px;white-space:pre-wrap}
+.ov{position:fixed;inset:0;background:rgba(10,20,35,.55);display:grid;place-items:center;padding:20px;z-index:9}
+.dlg{background:var(--card);border-radius:14px;padding:16px;max-width:320px;width:100%}.dlg .row{margin-top:14px}.dlg button{flex:1}
+
+:root{--bg:#F1F5FB;--card:#fff;--ink:#0F1B2D;--mut:#5B6B80;--blue:#1856D6;--blue2:#0B3FA8;--yel:#FFC21A;--yel2:#F5A800;--ok:#12A66A;--bad:#E0443E;--line:#DCE4EF;--sh:0 4px 14px rgba(15,40,90,.08)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1320;--card:#151F31;--ink:#EAF0F8;--mut:#9DB0C6;--blue:#4C8DFF;--blue2:#2A62D6;--ok:#2FCB86;--bad:#FF6B63;--line:#26344B;--sh:0 4px 14px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#0C1320;--card:#151F31;--ink:#EAF0F8;--mut:#9DB0C6;--blue:#4C8DFF;--blue2:#2A62D6;--ok:#2FCB86;--bad:#FF6B63;--line:#26344B;--sh:0 4px 14px rgba(0,0,0,.35)}
+button{transition:transform .08s,box-shadow .08s,filter .15s,background .15s;-webkit-tap-highlight-color:transparent}
+button:not(:disabled):hover{filter:brightness(1.06)}
+.top{background:linear-gradient(135deg,#0B3FA8,#1856D6 60%,#2F7BFF)}
+.card,.li,figure{box-shadow:var(--sh);border-radius:16px}
+.pri{background:linear-gradient(180deg,#FFD24D,var(--yel2));color:#1B1500;font-weight:800;font-size:16px;letter-spacing:.2px;min-height:52px;border-radius:14px;box-shadow:0 4px 0 #B77C00,0 8px 16px rgba(245,168,0,.3)}
+.pri:active{transform:translateY(4px);box-shadow:0 0 0 #B77C00,0 2px 6px rgba(245,168,0,.3)}
+.sm{background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;border-radius:11px;font-weight:700;min-height:38px;padding:7px 15px;box-shadow:0 3px 0 rgba(8,30,90,.55)}
+.sm:active{transform:translateY(3px);box-shadow:none}
+.sm:disabled{background:var(--line);color:var(--mut);box-shadow:none}
+.ghost{border-radius:10px;border-width:1.5px;font-weight:600}.top .ghost{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.55)}
+.wide{background:var(--card);border:2px solid var(--line);border-radius:14px;min-height:48px;font-weight:600;box-shadow:var(--sh)}
+.opt{border-radius:14px;border-width:2px;font-weight:500;box-shadow:0 3px 0 var(--line);padding:12px}
+.opt:active{transform:translateY(3px);box-shadow:none}
+.opt:hover{border-color:var(--blue)}
+.lt{background:color-mix(in srgb,var(--blue) 14%,var(--card));color:var(--blue);width:30px;height:30px;border-radius:9px}
+.opt.right{box-shadow:0 3px 0 var(--ok)}.opt.right .lt{background:var(--ok);color:#fff}
+.opt.wrong{box-shadow:0 3px 0 var(--bad)}.opt.wrong .lt{background:var(--bad);color:#fff}
+.opt.sel{box-shadow:0 3px 0 var(--blue)}.opt.sel .lt{background:var(--blue);color:#fff}
+.dot{border-radius:9px;font-weight:600}.dot.dn{background:var(--blue);border-color:var(--blue)}
+.chip{border-radius:99px;font-weight:600}.chip.on{background:linear-gradient(180deg,var(--blue),var(--blue2));border-color:var(--blue2)}
+.nd{background:color-mix(in srgb,var(--blue) 10%,var(--card));color:var(--blue)}.nd.ok{background:var(--ok);color:#fff}
+.li{border-radius:16px;padding:11px 12px}.pill.ok{background:var(--ok)}
+.bar{height:8px;border-radius:4px}.bar i{background:linear-gradient(90deg,var(--yel),var(--yel2));border-radius:4px;transition:width .3s}
+.expl{border-left-color:var(--blue);background:color-mix(in srgb,var(--blue) 8%,var(--card))}
+input:focus,textarea:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 25%,transparent)}
+a.pri{box-shadow:0 4px 0 #B77C00,0 8px 16px rgba(245,168,0,.3)}
+
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.wrap>*{animation:up .28s ease both}.wrap>*:nth-child(2){animation-delay:.04s}.wrap>*:nth-child(3){animation-delay:.08s}.wrap>*:nth-child(4){animation-delay:.12s}
+.opt.wrong{animation:shake .35s}.opt.right{animation:pop .3s}.card .ring{animation:pop .5s}
+.hello{background:linear-gradient(135deg,#0B3FA8,#2F7BFF);color:#fff;padding:14px 16px;border-radius:20px;box-shadow:0 8px 20px rgba(24,86,214,.3);position:relative;overflow:hidden}
+.hello::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.1)}
+.hello .ring{--rb:#1650C8;--z:64px}.hello .ring b{color:#fff}.hello h2{font-size:18px}.hello p{color:#D6E4FF}
+.card h2{font-size:18px;line-height:1.35}
+.sign{background:linear-gradient(180deg,color-mix(in srgb,var(--blue) 8%,var(--card)),var(--bg));border:1px solid var(--line);border-radius:16px;padding:12px}.sign svg{width:132px;height:132px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
+.strip{background:var(--card);border-radius:16px;padding:10px;box-shadow:var(--sh)}
+.bar{height:10px}
+#nx{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:2}
+.li:not(.lock):active{transform:scale(.99)}
+.li.lock .sm::before{content:"🔒 "}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.nd{width:40px;height:40px;border-radius:12px;font-size:20px;border:0}
+.nd.ok{background:color-mix(in srgb,var(--ok) 15%,var(--card));position:relative}.nd.ok::after{content:"✓";position:absolute;right:-5px;bottom:-5px;width:17px;height:17px;border-radius:50%;background:var(--ok);color:#fff;font-size:11px;display:grid;place-items:center;border:2px solid var(--card)}
+.mb{display:block;height:5px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}.mb u{display:block;height:100%;background:linear-gradient(90deg,var(--ok),#5BE0A5);border-radius:3px}
+.cf{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}.cf i{position:absolute;top:-14px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{top:105%;transform:rotate(720deg) translateX(40px)}}
+.goal{padding:12px 14px}.goal .bar{margin:8px 0 0}.top .ghost{padding:3px 8px}.sign.big{padding:6px}.sign.big svg{width:100%;max-width:320px;height:auto;filter:none;border-radius:12px}
+body{background:linear-gradient(180deg,#D9E6FA 0,var(--bg) 280px) no-repeat,var(--bg)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:var(--bg)}}
+:root[data-theme="dark"] body{background:var(--bg)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;padding:10px 14px 12px;box-shadow:0 8px 24px rgba(11,63,168,.28)}
+.top::after{height:4px}
+.logo{font-size:19px;letter-spacing:.3px}
+.logo::before{content:"↑";width:27px;height:27px;border-radius:9px;background:var(--yel);color:#14202E;display:inline-grid;place-items:center;font-size:17px;margin-right:9px;vertical-align:-7px;box-shadow:0 2px 0 var(--yel2)}
+.wrap{max-width:540px;padding:16px 14px 44px}
+h1{font-size:30px;line-height:1.1;font-weight:800;letter-spacing:-.5px;background:linear-gradient(90deg,var(--blue),#5AA2FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card,.li,figure{border:1px solid color-mix(in srgb,var(--line) 55%,transparent);border-radius:20px;box-shadow:0 1px 2px rgba(15,30,60,.06),0 10px 28px rgba(15,40,90,.09)}
+.card{padding:16px}
+input{border:2px solid var(--line);border-radius:12px;padding:13px}
+label{font-weight:600}
+.hello{flex-wrap:wrap;gap:14px;padding:18px;border-radius:24px;background:linear-gradient(135deg,#0A2E7A,#1856D6 55%,#3A8BFF);box-shadow:0 14px 30px rgba(24,86,214,.35)}
+.hello .ring{--z:78px}.hello h2{font-size:21px;font-weight:800;letter-spacing:-.2px}
+.st{display:flex;gap:8px;width:100%;position:relative;z-index:1}
+.st span{flex:1;text-align:center;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:8px 4px;font-size:12px;font-weight:600}
+.li{padding:12px;gap:12px;margin:9px 0}
+.nd{width:48px;height:48px;border-radius:15px;font-size:23px;color:var(--ink)}
+.k-t0 .nd{background:color-mix(in srgb,#E0443E 17%,var(--card))}.k-t1 .nd{background:color-mix(in srgb,#1856D6 17%,var(--card))}.k-t2 .nd{background:color-mix(in srgb,#12A66A 20%,var(--card))}
+.k-mix .nd{background:color-mix(in srgb,#8B5CF6 18%,var(--card))}.k-exam .nd{background:color-mix(in srgb,#FFC21A 30%,var(--card))}.k-signs .nd{background:color-mix(in srgb,#06B6D4 20%,var(--card))}
+.nd.ok{box-shadow:0 0 0 2px var(--ok)}
+.tx b{font-size:15.5px;font-weight:700}
+.li.lock{opacity:1}.li.lock .nd,.li.lock .tx{opacity:.55}.li.lock .nd{filter:grayscale(1)}
+.li .sm{border-radius:99px;padding:8px 16px}
+.pill{font-weight:700;padding:3px 10px}
+.card h2{font-size:19px;letter-spacing:-.1px}
+.opt{padding:14px;border-radius:16px;font-size:15.5px}.lt{width:32px;height:32px;border-radius:50%;font-size:14px}
+.sign{border-radius:18px}
+#nx{border-radius:16px}
+.chip,.dot{box-shadow:var(--sh)}
+.goal{background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--yel) 10%,var(--card)))}
+
+.sec{font-size:12px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--mut);margin:22px 4px 8px}
+.hello{margin:0 0 14px}
+.card{margin:12px 0}.li{margin:8px 0;min-height:72px}
+.card .row+.bar{margin-top:10px}
+app>.row,#app>.row{margin-bottom:6px}
+#app>.row:first-child b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app>.row:first-child>span{display:flex;gap:6px;align-items:center;flex:none}
+.card h2+p{margin-top:4px}
+.expl{line-height:1.5;margin:10px 0}
+.expl b{display:block;margin-bottom:4px}
+.row.small{padding:6px 0;border-bottom:1px solid var(--line)}.row.small:last-child{border:0}
+.tx span{display:block;margin-top:2px}
+.tx{display:flex;flex-direction:column}
+button{min-height:44px}.ghost{min-height:34px}.sm{min-height:38px}.pri{min-height:52px}.dot{min-height:34px}.chip{min-height:36px}
+.top .in{gap:10px}.top .in>span:last-child{display:flex;gap:6px;align-items:center}
+.top .ghost{min-height:30px}
+.card .row button+button{margin-left:0}
+.card>.row:last-child{margin-top:12px}
+.strip{gap:8px;margin:12px 0}
+ol.steps{line-height:1.55}
+#er,.err{margin-bottom:6px}
+.pri+.pri,.pri+.wide,.wide+.pri{margin-top:8px}
+@media(max-width:360px){.st span{font-size:11px}.nd{width:42px;height:42px}}
+
+#tb{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;justify-content:center;gap:6px;padding:8px 14px calc(env(safe-area-inset-bottom,0px) + 8px);background:color-mix(in srgb,var(--card) 90%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(15,40,90,.08)}
+#tb button{flex:1;max-width:170px;background:transparent;color:var(--mut);font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px;min-height:52px;border-radius:14px}
+#tb i{font-style:normal;font-size:21px;line-height:1}
+#tb .on{color:var(--blue);background:color-mix(in srgb,var(--blue) 13%,transparent)}
+body:has(#tb) .wrap{padding-bottom:110px}
+.k-yol .nd{background:color-mix(in srgb,#F97316 20%,var(--card))}.win{display:flex;align-items:center;gap:8px;margin:6px 0 2px;font-size:16px}.win i{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);flex:none}.card .steps{margin:8px 0 14px;padding-left:20px;line-height:1.55}</style></head><body>
+<div class="top"><div class="in"><span class="logo">YO'L TEST</span><span><button class="ghost" id="sn" aria-label="Ovoz">🔔</button> <button class="ghost" id="fz" aria-label="Shrift o'lchami">Aa</button> <button class="ghost" id="th" aria-label="Mavzu">◐</button> <span id="who"></span></span></div></div>
+<div class="wrap" id="app"></div>
+<script>
+/* Savollar bazasi YHQ asosida kengaytirilgan. Rasmiy bazani qo'shish: Q massiviga [t,savol,[to'g'ri,xato,xato],izoh,belgi] qo'shing. Birinchi variant to'g'ri. t: 0 belgilar, 1 qoidalar, 2 birinchi yordam */
+var T=["Yo'l belgilari","Harakat qoidalari","Birinchi yordam"],C=["Ogohlantiruvchi","Imtiyozli","Taqiqlovchi","Buyuruvchi","Axborot"];
+var RED="#D32F2F",INK="#14202E",BLU="#1565C0",W="#fff";
+var sg=function(b){return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">'+b+'</svg>'};
+var tri=function(i){return '<polygon points="50,8 94,86 6,86" fill="#fff" stroke="'+RED+'" stroke-width="9" stroke-linejoin="round"/>'+i};
+var rc=function(i){return '<circle cx="50" cy="50" r="44" fill="#fff" stroke="'+RED+'" stroke-width="10"/>'+i};
+var bc=function(i){return '<circle cx="50" cy="50" r="46" fill="'+BLU+'"/>'+i};
+var bs=function(i){return '<rect x="4" y="4" width="92" height="92" rx="8" fill="'+BLU+'"/>'+i};
+var au=function(c){return '<polygon points="50,16 74,44 60,44 60,86 40,86 40,44 26,44" fill="'+c+'"/>'};
+var pe=function(c){return '<circle cx="50" cy="38" r="6" fill="'+c+'"/><path d="M50 47V62M50 62L42 76M50 62L58 76M41 52H59" stroke="'+c+'" stroke-width="5" stroke-linecap="round" fill="none"/>'};
+var tx=function(t,s,c){return '<text x="50" y="'+(50+s*.36)+'" font-size="'+s+'" font-weight="800" text-anchor="middle" fill="'+c+'" font-family="sans-serif">'+t+'</text>'};
+var dm='<polygon points="50,5 95,50 50,95 5,50" fill="#FFC72C" stroke="#fff" stroke-width="4"/><polygon points="50,16 84,50 50,84 16,50" fill="none" stroke="'+INK+'" stroke-width="3"/>';
+var lt=function(a){return sg('<rect x="30" y="2" width="40" height="96" rx="10" fill="#222"/>'+[[22,"#F44336"],[50,"#FFC107"],[78,"#4CAF50"]].map(function(c,i){return '<circle cx="50" cy="'+c[0]+'" r="12" fill="'+(i==a?c[1]:"#444")+'"/>'}).join(""))};
+var mir=function(i){return '<g transform="translate(100,0) scale(-1,1)">'+i+'</g>'};
+var ar=function(c){return '<polygon points="34,84 34,50 56,50 56,36 80,56 56,76 56,62 46,62 46,84" fill="'+c+'"/>'};
+var cv='<path d="M38 76V58Q38 44 54 40" fill="none" stroke="'+INK+'" stroke-width="7"/><polygon points="52,28 70,40 52,52" fill="'+INK+'"/>';
+var sl='<path d="M24 76L76 24" stroke="'+RED+'" stroke-width="8"/>';
+var L=[
+["warn",0,"Xavfli joy (boshqa xavflar)",tri('<rect x="46" y="34" width="8" height="28" fill="'+INK+'"/><circle cx="50" cy="73" r="5" fill="'+INK+'"/>')],
+["pedw",0,"Piyodalar o'tish joyi oldinda",tri(pe(INK))],
+["yield",1,"Yo'l bering",'<polygon points="50,92 6,14 94,14" fill="#fff" stroke="'+RED+'" stroke-width="9" stroke-linejoin="round"/>'],
+["stop",1,"STOP: to'xtash shart",'<polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30" fill="'+RED+'" stroke="#fff" stroke-width="3"/>'+tx("STOP",26,W)],
+["main",1,"Asosiy yo'l",dm],
+["noentry",2,"Kirish taqiqlanadi",'<circle cx="50" cy="50" r="46" fill="'+RED+'"/><rect x="20" y="42" width="60" height="16" fill="#fff"/>'],
+["speed",2,"Tezlik 40 km/soatdan oshmasin",rc(tx("40",36,INK))],
+["nopark",2,"To'xtab turish taqiqlanadi",bc('<circle cx="50" cy="50" r="40" fill="none" stroke="'+RED+'" stroke-width="8"/><path d="M28 72L72 28" stroke="'+RED+'" stroke-width="8"/>')],
+["up",3,"To'g'riga harakatlanish",bc(au(W))],
+["minsp",3,"Eng kam tezlik 30 km/soat",bc(tx("30",36,W))],
+["pedx",4,"Piyodalar o'tish joyi",bs('<polygon points="50,14 86,80 14,80" fill="#fff"/>'+pe(INK))],
+["park",4,"To'xtab turish joyi",bs(tx("P",64,W))],
+["curr",0,"Xavfli o'ngga burilish",tri(cv)],
+["curl",0,"Xavfli chapga burilish",tri(mir(cv))],
+["mend",1,"Asosiy yo'l tugaydi",dm+'<path d="M22 78L78 22" stroke="'+INK+'" stroke-width="5"/>'],
+["nomove",2,"Harakat taqiqlanadi",rc("")],
+["noov",2,"Quvib o'tish taqiqlanadi",rc('<rect x="18" y="38" width="26" height="26" rx="6" fill="'+RED+'"/><rect x="56" y="38" width="26" height="26" rx="6" fill="'+INK+'"/>')],
+["norr",2,"O'ngga burilish taqiqlanadi",rc(ar(INK)+sl)],
+["noll",2,"Chapga burilish taqiqlanadi",rc(mir(ar(INK))+sl)],
+["right",3,"O'ngga harakatlanish",bc(ar(W))],
+["left",3,"Chapga harakatlanish",bc(mir(ar(W)))],
+["one",4,"Bir tomonlama harakat",bs(au(W))],
+["narrow",0,"Yo'l torayishi",tri('<path d="M34 80V62Q42 48 42 34M66 80V62Q58 48 58 34" fill="none" stroke="'+INK+'" stroke-width="7"/>')],
+["tlight",0,"Svetofor bilan tartibga solish",tri('<rect x="40" y="30" width="20" height="46" rx="5" fill="'+INK+'"/><circle cx="50" cy="40" r="4.5" fill="#F44336"/><circle cx="50" cy="53" r="4.5" fill="#FFC107"/><circle cx="50" cy="66" r="4.5" fill="#4CAF50"/>')],
+["kids",0,"Bolalar",tri('<g transform="translate(-8,4)">'+pe(INK)+'</g><g transform="translate(24,16) scale(.75)">'+pe(INK)+'</g>')],
+["sp60",2,"Tezlik 60 km/soatdan oshmasin",rc(tx("60",36,INK))],
+["sp80",2,"Tezlik 80 km/soatdan oshmasin",rc(tx("80",36,INK))],
+["minsp50",3,"Eng kam tezlik 50 km/soat",bc(tx("50",36,W))]];
+var G={lr:lt(0),ly:lt(1)};L.forEach(function(x){G[x[0]]=sg(x[3])});
+function esc(s){return s.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var Q=[
+[1,"Svetoforning qizil signali nimani bildiradi?",["Harakat taqiqlanadi","Ehtiyot bo'lib o'tish mumkin","Tezlikni oshirish kerak"],"Qizil signalda to'xtash chizig'i oldida to'xtash shart.","lr"],
+[1,"Svetoforning sariq signali nimani bildiradi?",["Signal almashadi, imkon bo'lsa to'xtang","Tezlashib o'ting","Erkin o'tish mumkin"],"Sariq signal o'zgarish haqida ogohlantiradi.","ly"],
+[1,"Xavfsizlik kamarini kim taqishi shart?",["Kamari bor o'rindiqlardagi barcha","Faqat haydovchi","Faqat shahar tashqarisida"],"Kamar hayotni saqlaydi."],
+[1,"Tartibga solinmagan piyodalar o'tish joyida haydovchi nima qiladi?",["Piyodalarga yo'l beradi","Signal chalib o'tadi","Tezlikni oshiradi"],"O'tish joyiga kirgan piyodaga yo'l berish shart."],
+[1,"Mast holda rul boshqarish mumkinmi?",["Yo'q, taqiqlanadi","Oz miqdorda mumkin","Faqat kechasi"],"Mast holda boshqarish mutlaq taqiqlangan."],
+[1,"Harakatlanayotganda telefonni qo'lda ushlab gaplashish mumkinmi?",["Yo'q","Ha","Faqat shahar ichida"],"Diqqat chalg'ishi avariyaning asosiy sababi."],
+[1,"Oldingi mashina bilan masofa nima uchun saqlanadi?",["U to'satdan tormozlansa to'qnashmaslik uchun","Yoqilg'i tejash uchun","Jarimadan qochish uchun"],"Masofa tormozlash uchun vaqt beradi."],
+[0,"Taqiqlovchi belgilar aksariyati qanday rangli hoshiyaga ega?",["Qizil","Yashil","Sariq"],"Taqiqlovchi belgilar qizil hoshiyali."],
+[0,"Ko'k doira shaklidagi belgilar nimani bildiradi?",["Harakatni majburiy shartga bog'laydi","Harakatni taqiqlaydi","Faqat axborot beradi"],"Bu buyuruvchi belgilar."],
+[2,"Baxtsiz hodisada birinchi navbatda nima qilinadi?",["O'z xavfsizligini ta'minlab, 103 ga qo'ng'iroq qilish","Jabrlanuvchini darhol siljitish","Hech narsa qilmay kutish"],"Avval joy xavfsizligi, keyin yordam chaqirish."],
+[2,"Kuchli tashqi qon ketganda nima qilinadi?",["Jarohatga bosib turuvchi bog'lam qo'yiladi","Jarohat yuvilib kutiladi","Hech narsa"],"Bosim qon ketishini to'xtatishga yordam beradi."],
+[2,"Hushsiz, lekin nafas olayotgan jabrlanuvchi qanday yotqiziladi?",["Yon tomoniga (turg'un holatda)","Chalqancha, boshi ko'tarilgan","Qorni bilan"],"Yon holat nafas yo'llarini ochiq saqlaydi."],
+[2,"Avariya joyida ogohlantiruvchi uchburchak nima uchun qo'yiladi?",["Boshqa haydovchilarni ogohlantirish uchun","Mashinani bezash uchun","Belgi o'rnini bosadi"],"Ikkinchi avariyaning oldini oladi.","warn"],
+[2,"Suyak sinishiga gumon bo'lsa nima qilinadi?",["Sinish joyi qimirlatilmay mahkamlanadi, yordam chaqiriladi","Darrov to'g'rilanadi","Jabrlanuvchi yurgiziladi"],"Qimirlatish og'riqni kuchaytiradi."],
+[1,"Uzluksiz (qattiq) yo'l chizig'ini kesib o'tish mumkinmi?",["Yo'q, taqiqlanadi","Ha, har doim","Faqat kechasi"],"Uzluksiz chiziq kesib o'tilmaydi."],
+[1,"Uzuq (punktir) markaz chizig'i nimani bildiradi?",["Xavfsiz bo'lsa kesib o'tish mumkin","Kesib o'tish taqiqlanadi","To'xtash taqiqlanadi"],"Uzuq chiziq xavfsiz holatda kesib o'tishga ruxsat beradi."],
+[1,"Qaysi joyda quvib o'tish taqiqlanadi?",["Piyodalar o'tish joyida","Bo'sh to'g'ri yo'lda","Keng shosseda"],"Piyodalar o'tish joyida quvib o'tish taqiqlangan."],
+[1,"Burilishdan oldin nima qilinadi?",["Burilish ko'rsatkichi oldindan yoqiladi","Signal chalinadi","Tezlik oshiriladi"],"Boshqalarni niyatingizdan oldindan ogohlantiring."],
+[1,"Qarama-qarshidan mashina kelganda uzoq yorug'lik...",["Yaqin yorug'likka almashtiriladi","Yoqilgan holda qoladi","Avariya chiroqlari yoqiladi"],"Uzoq yorug'lik qarama-qarshi haydovchini ko'r qiladi."],
+[1,"Tuman yoki kuchli yomg'irda haydovchi nima qiladi?",["Tezlikni kamaytirib, masofani oshiradi","Tezlikni oshiradi","Masofani qisqartiradi"],"Ko'rinish yomonlashadi, tormoz yo'li uzayadi."],
+[1,"Nam yoki sirpanchiq yo'lda tormoz yo'li...",["Uzayadi","Qisqaradi","O'zgarmaydi"],"G'ildiraklarning yo'lga ilashishi kamayadi."],
+[1,"Haydovchida qaysi hujjatlar bo'lishi shart?",["Guvohnoma, texnik pasport va sug'urta polisi","Faqat pasport","Faqat guvohnoma"],"Hujjatlarsiz haydash qoidabuzarlik."],
+[1,"Temir yo'l kesishmasida shlagbaum yopilayotgan bo'lsa...",["O'tish taqiqlanadi","O'tish mumkin","Tezlashib o'tiladi"],"Poyezd harakati ustun, o'tish taqiqlanadi."],
+[1,"Svetoforning yashil miltillovchi signali nimani bildiradi?",["Signal tez orada o'zgaradi","Harakat taqiqlangan","Tezlashish kerak"],"Yashil miltillash signal almashishidan ogohlantiradi."],
+[1,"Tartibga soluvchi ishorasi svetofor talabiga zid bo'lsa, kimga bo'ysuniladi?",["Tartibga soluvchi ishorasiga","Svetoforga","Yo'l belgisiga"],"Tartibga soluvchi ishorasi svetofor va belgilardan ustun."],
+[1,"Ko'k chiroq va sirenali mashina yaqinlashsa nima qilinadi?",["Yo'l berib, chetga olinadi","Tezlashiladi","Quvib o'tiladi"],"Maxsus signalli mashinaga yo'l berish shart."],
+[1,"Piyodalar o'tish joyida to'xtab turish mumkinmi?",["Yo'q, taqiqlanadi","Ha, qisqa vaqtga","Ha, kechasi"],"Piyodalar o'tish joyida to'xtab turish taqiqlangan."],
+[1,"Bolalarni mashinada tashishda nima shart?",["Yoshiga mos bolalar o'rindig'i yoki kamar","Ona qo'lida o'tirishi","Old o'rindiqda erkin"],"Bolalar xavfsizligi maxsus vositalar bilan ta'minlanadi."],
+[2,"Nafas va yurak urishi to'xtagan bo'lsa nima qilinadi?",["Yurak massaji va sun'iy nafas, 103 chaqiriladi","Kutiladi","Suv ichiriladi"],"Har soniya muhim, darhol yordam boshlanadi."],
+[2,"Kuygan joyga birinchi yordam qanday?",["Sovuq oqar suv bilan sovitiladi","Moy surtiladi","Pufaklar yoriladi"],"Sovitish zararni kamaytiradi, moy surtilmaydi."],
+[2,"Tez yordam raqami qaysi?",["103","101","102"],"103 tez yordam, 102 militsiya, 101 yong'in xizmati."],
+[2,"Mototsiklchi jabrlanganda dubulg'a...",["Zarurat bo'lmasa yechilmaydi","Darhol yechiladi","Burab olinadi"],"Bo'yin shikastlanishi xavfi bor."],
+[1,"Svetoforning qizil va sariq signallari birga yonsa nima bildiradi?",["Harakat taqiqlanadi, yashil signal yonishi haqida ogohlantiradi","Harakatga ruxsat beriladi","Faqat to'g'riga yurish mumkin"],"Qizil bilan sariq birga yonsa, harakat hali taqiqlangan."],
+[1,"Svetofor o'chgan yoki sariq miltillasa chorraha qanday hisoblanadi?",["Tartibga solinmagan, belgilarga amal qilinadi","Tartibga solingan, hamma yura oladi","Yopiq"],"Bunda yo'l belgilari va umumiy qoidalar qo'llaniladi."],
+[1,"Svetofor signali va yo'l belgisi bir-biriga zid bo'lsa, qaysi biriga amal qilinadi?",["Svetofor signaliga","Yo'l belgisiga","O'zingiz tanlaysiz"],"Svetofor signali ustuvorlik belgilaridan ustun."],
+[1,"Teng ahamiyatli yo'llar kesishgan tartibga solinmagan chorrahada kimga yo'l beriladi?",["O'ng tomondan kelayotgan transportga","Chap tomondan kelayotganga","Kattaroq transportga"],"Teng yo'llarda o'ngdan kelayotganga yo'l beriladi."],
+[1,"Teng ahamiyatli yo'llar chorrahasida relsli tramvay yaqinlashsa...",["Tramvayga yo'l beriladi","Tramvay yo'l beradi","Birinchi kelgan o'tadi"],"Tramvay relsda yurgani uchun chetga chiqa olmaydi."],
+[1,"«Asosiy yo'l» belgisi haydovchiga nimani beradi?",["Chorrahalarda birinchi o'tish huquqini","To'xtab turish huquqini","Tezlikni oshirish huquqini"],"Asosiy yo'ldagi haydovchi kesishgan yo'ldagilarga yo'l bermaydi.","main"],
+[1,"«STOP» belgisi oldida nima qilinadi?",["To'liq to'xtab, kesishgan yo'ldagilarga yo'l beriladi","Sekinlashib o'tiladi","Yo'l bo'sh bo'lsa to'xtamasdan o'tiladi"],"STOP belgisida to'liq to'xtash majburiy.","stop"],
+[1,"«Yo'l bering» belgisi oldida haydovchi...",["Kesishgan yo'ldagi transportga yo'l beradi","Har doim to'xtaydi","Birinchi o'tadi"],"Kerak bo'lsa to'xtab, asosiy yo'ldagilarga yo'l beriladi.","yield"],
+[1,"Chorrahada tirbandlik bo'lib, chiqish yo'li bo'sh bo'lmasa...",["Chorrahaga kirish taqiqlanadi","Yashil signalda kirib kutiladi","Signal chalib kiriladi"],"Chorrahani to'sib qo'yish boshqalar harakatini to'xtatadi."],
+[1,"O'ngga burilishda harakat qaysi qatordan boshlanadi?",["Eng o'ng qatordan","O'rta qatordan","Eng chap qatordan"],"O'ngga burilish o'ng chetdan bajariladi."],
+[1,"Qaysi holatda quvib o'tish taqiqlanadi?",["Oldingi mashina chapga burilish ko'rsatkichini yoqqan","Yo'l bo'sh va ko'rinish yaxshi","Oldingi mashina sekin ketayotgan"],"Chapga burilayotgan mashinani quvib o'tish xavfli."],
+[1,"Sizni quvib o'tayotgan haydovchi tezligini oshirsa...",["Tezlikni oshirish taqiqlanadi","Tezlikni oshirish kerak","Chap qatorga o'tiladi"],"Quvib o'tishga to'sqinlik qilish mumkin emas."],
+[1,"Tartibga solinmagan chorrahada quvib o'tish...",["Taqiqlanadi","Ruxsat etiladi","Faqat tunda mumkin"],"Chorrahada quvib o'tish ko'rinishni cheklaydi."],
+[1,"Chorrahada orqaga harakatlanish mumkinmi?",["Yo'q, taqiqlanadi","Ha, har doim","Faqat kunduz kuni"],"Chorrahada orqaga yurish taqiqlangan."],
+[1,"Tunnelda yoki ko'prikda teskari burilish (razvorot)...",["Taqiqlanadi","Ruxsat etiladi","Faqat bo'sh bo'lsa mumkin"],"Bunday joylarda burilib olish xavfli."],
+[1,"Temir yo'l kesishmasidagi qizil miltillovchi signal...",["O'tish taqiqlanadi, poyezd yaqinlashmoqda","Ehtiyotkor o'tish mumkin","Faqat yengil mashinalar o'tadi"],"Miltillovchi qizil signalda to'xtash shart."],
+[1,"Majburiy to'xtaganda nima qilinadi?",["Avariya chiroqlari yoqilib, ogohlantiruvchi uchburchak qo'yiladi","Faqat dvigatel o'chiriladi","Hech narsa"],"Boshqa haydovchilarni oldindan ogohlantirish zarur.","warn"],
+[1,"Ikki uzluksiz chiziq (ikkilangan) nimani bildiradi?",["Qarama-qarshi oqimlarni ajratadi, kesib o'tish taqiqlanadi","Parkovka joyi","Piyodalar yo'lagi"],"Ikkilangan uzluksiz chiziq kesib o'tilmaydi."],
+[1,"Ogohlantiruvchi belgilar qanday shaklda bo'ladi?",["Qizil hoshiyali uchburchak","Ko'k doira","Sariq romb"],"Ular xavfli joy haqida oldindan ogohlantiradi.","warn"],
+[0,"Sariq rombsimon belgi nimani bildiradi?",["Asosiy yo'l","Yo'l bering","To'xtash taqiqlangan"],"Sariq romb asosiy yo'lni belgilaydi.","main"],
+[0,"Axborot-ko'rsatkich belgilari asosan qaysi rangda bo'ladi?",["Ko'k","Qizil","Qora"],"Ular harakatni tashkil etishda yordam beradi.","park"],
+[1,"Tuman, yomg'ir yoki qorda haydovchi...",["Yaqin yorug'lik yoki tumanga qarshi chiroqlarni yoqadi","Faqat parkovka chiroqlarini yoqadi","Chiroqsiz ketadi"],"Ko'rinish yomonlashganda yoritish zarur."],
+[1,"Yoritilmagan yo'lda qarama-qarshi mashina bo'lmasa qaysi yorug'lik ishlatiladi?",["Uzoq yorug'lik","Yaqin yorug'lik","Faqat parkovka chiroqlari"],"Uzoq yorug'lik ko'rinish masofasini oshiradi."],
+[1,"Qor yoki muzli yo'lda tormoz berish qanday bo'lishi kerak?",["Silliq, keskin bosilmasdan","Keskin bosiladi","Tormozdan foydalanilmaydi"],"Keskin tormoz mashinani sirpantirib yuboradi."],
+[1,"To'xtash yo'li nimadan iborat?",["Haydovchi reaksiyasi va tormozlash yo'lidan","Faqat tormoz yo'lidan","Faqat tezlikdan"],"Reaksiya vaqtida mashina tormozsiz yuradi."],
+[1,"Diqqatni susaytiruvchi dori ichgan yoki charchagan haydovchi...",["Rul boshqarmasligi kerak","Ehtiyotkor boshqarsa bo'ladi","Faqat shahar ichida"],"Charchoq va dori reaksiyani sekinlashtiradi."],
+[1,"Haydashdan oldin nima tekshiriladi?",["Tormoz, rul, yoritish va shinalar","Faqat radio","Faqat yoqilg'i"],"Texnik nosozlik avariyaga olib keladi."],
+[1,"Mototsiklda harakatlanayotganlar...",["Mahkamlangan dubulg'a taqishi shart","Dubulg'asiz yurishi mumkin","Faqat haydovchi taqadi"],"Dubulg'a bosh jarohatini kamaytiradi."],
+[1,"Yuk tashishda yuk...",["Ko'rinishni cheklamasligi va chiroqlarni to'smasligi kerak","Istalgan balandlikda bo'ladi","Chiroqlarni berkitishi mumkin"],"Yuk xavfsizlikka xalaqit bermasligi lozim."],
+[1,"Yo'lakka chiqish uchun mashina eshigini ochish...",["Xavfsizligiga ishonch hosil qilib ochiladi","Darhol ochiladi","Signal chalib ochiladi"],"Yaqinlashayotgan transportga to'sqinlik qilish mumkin emas."],
+[1,"Piyodalar yo'lak bo'lmasa, yo'lning chetida qanday yuradi?",["Transport harakatiga qarama-qarshi tomonga","Transport yo'nalishida","Yo'l o'rtasida"],"Yaqinlashayotgan mashinani ko'rib turish xavfsizroq."],
+[1,"Quyidagi joylardan qaysi birida to'xtash va to'xtab turish taqiqlanadi?",["Tunnel, ko'prik va temir yo'l kesishmasida","Keng yo'l chetida","Hovlida"],"Bunday joylarda to'xtash harakatni to'sib qo'yadi."],
+[1,"Yo'l-transport hodisasida haydovchi nima qiladi?",["To'xtab, avariya signalini yoqadi, yordam va 102 ga xabar beradi","Joyni tark etadi","Mashinani siljitib ketadi"],"Hodisa joyini tark etish qonun buzilishi."],
+[2,"Yurak massaji va sun'iy nafas nisbati qanday?",["30 marta bosish va 2 marta nafas","10 marta bosish va 1 nafas","2 marta bosish va 30 nafas"],"Bu birinchi yordamning standart nisbati."],
+[2,"Arteriyadan kuchli qon ketganda nima qilinadi?",["Jarohatdan yuqoriga jgut qo'yilib, vaqti yoziladi","Faqat suv bilan yuviladi","Hech narsa qilinmaydi"],"Jgut qo'yilgan vaqt shifokorga aytilishi kerak."],
+[2,"Hushsiz jabrlanuvchiga suv ichirish mumkinmi?",["Yo'q, taqiqlanadi","Ha, ozgina","Faqat issiq choy"],"Suyuqlik nafas yo'llariga tushib, bo'g'ilish chaqirishi mumkin."],
+[2,"Mashina gazidan zaharlangan odamga birinchi yordam...",["Toza havoga olib chiqiladi va 103 chaqiriladi","Yopiq xonada yotqiziladi","Suv ichiriladi"],"Zaharlanishda avval toza havo kerak."],
+[2,"Avariyada bo'yin yoki umurtqa shikastlanishiga gumon bo'lsa...",["Jabrlanuvchi keraksiz qimirlatilmaydi","Darhol o'tirg'iziladi","Yurg'iziladi"],"Qimirlatish shikastni kuchaytirishi mumkin."]
+].map(function(r){return{t:r[0],q:r[1],o:r[2],e:r[3],g:r[4]}});
+L.forEach(function(x){var d=shuf(L.filter(function(y){return y[0]!=x[0]&&y[2]!=x[2]})).sort(function(p,q){return (q[1]==x[1])-(p[1]==x[1])}).slice(0,2);
+Q.push({t:0,q:"Bu belgi nimani bildiradi?",o:[x[2]].concat(d.map(function(y){return y[2]})),e:"Bu «"+C[x[1]]+"» belgilar guruhiga kiradi.",g:x[0]})});
+var CL={r:["#E53935","Qizil"],b:["#1E6BE0","Ko'k"],y:["#FFC107","Sariq"],g:["#2E9E5B","Yashil"],w:["#FAFAFA","Tez yordam"]};
+function car(x,y,c,t){var f=CL[c][0],a=c=="w",wl=function(X,Y){return '<rect x="'+X+'" y="'+Y+'" width="4" height="10" rx="1.5" fill="#111"/>'};
+return '<g transform="translate('+x+','+y+')">'+wl(-12,-13)+wl(8,-13)+wl(-12,5)+wl(8,5)+'<rect x="-10" y="-19" width="20" height="38" rx="8" fill="'+f+'" stroke="rgba(0,0,0,.5)" stroke-width="1"/><path d="M-7 -8Q0 -12 7 -8L6 -2H-6Z" fill="#CFEAFF"/><rect x="-6.5" y="-2" width="13" height="9" rx="2" fill="rgba(0,0,0,.16)"/><path d="M-6 9H6L7 13H-7Z" fill="#CFEAFF"/><circle cx="-6" cy="-17" r="1.8" fill="#FFF59D"/><circle cx="6" cy="-17" r="1.8" fill="#FFF59D"/><rect x="-8" y="17" width="4" height="1.6" fill="#FF1744"/><rect x="4" y="17" width="4" height="1.6" fill="#FF1744"/>'+
+(a?'<rect x="-1.2" y="-1" width="2.4" height="7" fill="#E53935"/><rect x="-3.5" y="1.3" width="7" height="2.4" fill="#E53935"/><circle cx="-4.5" cy="-4.5" r="2" fill="#2979FF"/><circle cx="4.5" cy="-4.5" r="2" fill="#2979FF"/>':'')+
+(t=="l"?'<circle cx="-9.5" cy="-16" r="2.8" fill="#FF9800"/>':t=="r"?'<circle cx="9.5" cy="-16" r="2.8" fill="#FF9800"/>':'')+'</g>'}
+var PA={s:"M115 146V26",l:"M115 146V124Q115 85 80 85H26",r:"M115 146V132Q115 115 136 115H174"};
+function rp(x,y,r){return r==0?[x,y]:r==1?[200-y,x]:r==2?[200-x,200-y]:[y,200-x]}
+function sn(k,x,y){var b=L.filter(function(z){return z[0]==k})[0][3];return '<svg x="'+(x-16)+'" y="'+(y-16)+'" width="32" height="32" viewBox="0 0 100 100">'+b+'</svg>'}
+function scene(cs){var s='<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs><rect width="200" height="200" fill="#8DB580"/>'+
+[[2,2],[134,2],[2,134],[134,134]].map(function(p){return '<rect x="'+p[0]+'" y="'+p[1]+'" width="64" height="64" rx="8" fill="#C7CFD8"/>'}).join("")+
+'<rect x="70" width="60" height="200" fill="#3A4350"/><rect y="70" width="200" height="60" fill="#3A4350"/><path d="M100 0V70M100 130V200M0 100H70M130 100H200" stroke="#fff" stroke-width="1.6" stroke-dasharray="7 6" opacity=".85"/>';
+cs.forEach(function(c){s+='<g transform="rotate('+c[0]*90+' 100 100)"><path d="'+PA[c[1]]+'" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>'+car(115,168,c[2],c[1])+'</g>'});
+cs.forEach(function(c){if(c[3]){var p=rp(147,150,c[0]);s+=sn(c[3],p[0],p[1])}});return s+'</svg>'}
+var SC=[
+[[[0,"s","r"],[3,"s","b"]],"b","Teng huquqli kesishmada o'ngdan kelayotgan transportga yo'l beriladi. Qizil uchun Ko'k o'ng tomonda."],
+[[[0,"s","r"],[1,"s","b"]],"r","Ko'k uchun o'ng tomonda Qizil bor, shuning uchun Ko'k yo'l beradi."],
+[[[0,"s","r"],[1,"s","b"],[3,"s","y"]],"y","Ko'k Qizilga, Qizil Sariqqa yo'l beradi. Sariqning o'ng tomonida hech kim yo'q, u birinchi o'tadi."],
+[[[0,"l","r"],[2,"s","b"]],"b","Chapga burilayotgan haydovchi qarama-qarshidan to'g'ri ketayotganga yo'l beradi."],
+[[[0,"s","r","yield"],[1,"s","b"]],"b","«Yo'l bering» belgisi bor haydovchi kesishayotgan yo'ldagilarga yo'l beradi."],
+[[[0,"s","r","stop"],[1,"s","b"]],"b","STOP belgisida to'liq to'xtab, kesishgan yo'ldagi barcha transportga yo'l beriladi."],
+[[[1,"s","r","main"],[0,"s","b"]],"r","«Asosiy yo'l» belgisi bor yo'lda ketayotgan haydovchi ustunlikka ega, o'ngdan kelayotgan bo'lsa ham."],
+[[[0,"s","r"],[1,"s","w"]],"w","Ko'k chiroqli maxsus signalli tez yordam kesishmada ustunlikka ega."],
+[[[2,"l","g"],[0,"s","y"]],"y","Chapga burilayotgan Yashil qarama-qarshidan to'g'ri ketayotgan Sariqqa yo'l beradi."],
+[[[3,"s","r"],[2,"s","b"]],"b","Qizil g'arbga ketmoqda, uning o'ng tomoni shimol. Ko'k shimoldan kelmoqda, shuning uchun Ko'k birinchi."],
+[[[0,"l","r"],[3,"s","b"]],"b","Chapga burilayotgan haydovchi o'ngdan kelayotganga ham yo'l beradi."],
+[[[1,"s","r","main"],[3,"l","b"]],"r","Asosiy yo'lda ham chapga burilayotgan haydovchi qarama-qarshidan to'g'ri ketayotganga yo'l beradi."]
+];
+SC.forEach(function(x,i){var n=x[0].map(function(c){return CL[c[2]][1]}),k=CL[x[1]][1];
+Q.push({t:1,q:"Qaysi avtomobil birinchi o'tadi?",o:[k].concat(n.filter(function(v){return v!=k})),e:x[2],g:"sc"+i});G["sc"+i]=scene(x[0])});
+Q.forEach(function(q,i){q.id=i});
+
+var mem={};
+function get(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return mem[k]||null}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}
+var app=document.getElementById("app"),who=document.getElementById("who"),timer=null,asUser=false,lastc="";
+function hash(s){var d=window.crypto&&crypto.subtle;if(!d)return Promise.resolve(btoa(unescape(encodeURIComponent(s))));
+return crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")})}
+function api(m,p,b){var s=get("yt_s");return fetch("/api"+p,{method:m,headers:{"Content-Type":"application/json","Authorization":"Bearer "+(s&&s.t||"")},body:b?JSON.stringify(b):undefined}).then(function(r){return r.json().then(function(j){if(r.status==401&&s){put("yt_s",null);auth()}j.ok=r.ok;return j})}).catch(function(){return{ok:false,error:"Server bilan aloqa yo'q."}})}
+function valid(s){return !!s&&!!s.t&&s.x>Date.now()}
+function users(){return get("yt_u")||{}}
+function me(){var s=get("yt_s");if(!valid(s))return null;var u=users()[s.e];return u?{e:s.e,r:s.r,u:u}:null}
+var pend=null;
+function save(e,u){var a=users();a[e]=u;put("yt_u",a);clearTimeout(pend);pend=setTimeout(function(){api("PUT","/data",u)},400)}
+function tb(a){var d=document.createElement("nav");d.id="tb";d.innerHTML=[["h","🏠","Bosh"],["s","🪧","Belgilar"],["y","🚗","Yo'l berish"]].map(function(x){return '<button class="'+(x[0]==a?'on':'')+'" data-t="'+x[0]+'"><i>'+x[1]+'</i>'+x[2]+'</button>'}).join("");document.body.appendChild(d);
+d.onclick=function(e){var t=e.target.closest("button");if(!t)return;t=t.dataset.t;if(t=="h")home();else if(t=="s")cat(0);else ye()}}
+function stop(){if(timer){clearInterval(timer);timer=null}var t=document.getElementById("tb");if(t)t.remove()}
+function ask(t,y,fn){var o=document.createElement("div");o.className="ov";o.innerHTML='<div class="dlg" role="dialog" aria-modal="true"><h2></h2><div class="row"><button class="ghost" id="dn" style="color:var(--ink)">Bekor qilish</button><button class="pri" id="dy"></button></div></div>';
+o.querySelector("h2").textContent=t;o.querySelector("#dy").textContent=y;document.body.appendChild(o);var c=function(){o.remove()};
+o.querySelector("#dn").onclick=c;o.onclick=function(e){if(e.target==o)c()};o.querySelector("#dy").onclick=function(){c();fn()};o.querySelector("#dn").focus()}
+function lo(){ask("Hisobdan chiqasizmi?","Ha, chiqish",function(){put("yt_s",null);asUser=false;auth()})}
+/* Qulaylik: shrift va mavzu */
+var pf=get("yt_p")||{fs:1,th:""};
+function ap(){var r=document.documentElement;r.style.setProperty("--fs",pf.fs);if(pf.th)r.dataset.theme=pf.th;else delete r.dataset.theme;put("yt_p",pf);document.getElementById("sn").textContent=pf.mu?"🔕":"🔔"}
+document.getElementById("fz").onclick=function(){pf.fs=pf.fs>=1.3?1:+(pf.fs+.15).toFixed(2);ap()};
+document.getElementById("th").onclick=function(){pf.th=pf.th==""?"dark":pf.th=="dark"?"light":"";ap()};document.getElementById("sn").onclick=function(){pf.mu=!pf.mu;ap()};ap();
+/* Klaviatura: 1-3 javob, Enter keyingi */
+document.addEventListener("keydown",function(e){if(/INPUT|TEXTAREA/.test(e.target.tagName))return;var o=document.querySelectorAll("#os .opt");if(e.key>="1"&&e.key<="3"&&o[+e.key-1])o[+e.key-1].click();if(e.key=="Enter"){var n=document.getElementById("nx");if(n)n.click()}});
+
+function auth(){stop();who.innerHTML="";
+app.innerHTML='<h1>Guvohnoma testlari</h1><p>Login va parol bilan kiring.</p><div class="strip">'+["stop","yield","speed","noentry","pedx","main"].map(function(k){return '<span>'+G[k]+'</span>'}).join("")+'</div>'+
+'<div class="card"><form id="f"><label for="e">Login</label><input id="e" autocomplete="username" autocapitalize="none" spellcheck="false"><label for="p">Parol</label><input id="p" type="password" autocomplete="current-password"><label class="small"><input type="checkbox" id="sp" style="width:auto;margin:0 6px 0 0">Parolni ko\'rsatish</label><div class="err" id="er" role="alert"></div><button class="pri">Kirish</button></form></div>'+
+'<div class="card"><h2>Login va parolingiz yo\'qmi?</h2><p>1 oylik kirish: <b>19 000 so\'m</b></p><ol class="steps"><li>Telegramda <b>@rustamoveu</b> ga yozing, to\'lov rekvizitlarini so\'rang.</li><li>To\'lovni qiling va chek skrinshotini yuboring.</li><li>Sizga login va parol beriladi (1 oy amal qiladi).</li></ol><a class="pri" href="https://t.me/rustamoveu" target="_blank" rel="noopener">Telegramda yozish</a></div>'+
+'<button class="ghost wide" id="demo">Ro\'yxatsiz 5 ta savol sinash</button>';
+document.getElementById("demo").onclick=function(){run({key:"demo",title:"Bepul sinov",qs:shuf(Q).slice(0,5),save:false})};
+document.getElementById("sp").onchange=function(){document.getElementById("p").type=this.checked?"text":"password"};
+document.getElementById("f").onsubmit=function(ev){ev.preventDefault();
+var e=document.getElementById("e").value.trim().toLowerCase(),p=document.getElementById("p").value,er=document.getElementById("er");
+if(!e||!p){er.textContent="Login va parolni kiriting.";return}
+er.textContent="Tekshirilmoqda...";
+api("POST","/login",{u:e,p:p}).then(function(j){if(!j.ok){er.textContent=j.error||"Xatolik";return}
+var us=users();us[e]=(j.data&&j.data.best)?j.data:(us[e]||{name:e,best:{},wrong:[],hist:[],streak:0,last:""});put("yt_u",us);
+put("yt_s",{e:e,t:j.token,r:j.role,x:j.exp});asUser=false;home()})}}
+
+function admin(){stop();who.innerHTML='<button class="ghost" id="out" style="color:#fff">Chiqish</button>';document.getElementById("out").onclick=lo;
+app.innerHTML='<h1>Boshqaruv paneli</h1><div class="card"><h2>Yangi o\'quvchi</h2><label for="nl">Login</label><input id="nl" autocapitalize="none" spellcheck="false"><label for="np">Parol</label><input id="np" autocapitalize="none" spellcheck="false"><label for="nd">Muddat (kun)</label><input id="nd" type="number" value="30" min="1"><div class="row"><button class="ghost" id="gn" style="color:var(--ink)">Parol yaratish</button><button class="sm" id="mk">Yaratish</button></div><div class="err" id="rs" role="alert"></div><pre id="cr" hidden></pre></div><div class="card"><h2>O\'quvchilar</h2><input id="q" placeholder="Qidirish"><div id="ul"></div></div><div class="card"><h2>Admin parolini o\'zgartirish</h2><input id="op" type="password" placeholder="Joriy parol"><input id="npw" type="password" placeholder="Yangi parol (8+ belgi)"><button class="sm" id="cpw">O\'zgartirish</button><div class="err" id="pe" role="alert"></div></div><button class="ghost wide" id="ts">Testlarni ko\'rish</button>';
+var $=function(i){return document.getElementById(i)},us=[];
+function gp(){var c="abcdefghjkmnpqrstuvwxyz23456789",r=new Uint8Array(8),o="";crypto.getRandomValues(r);for(var i=0;i<8;i++)o+=c[r[i]%c.length];return o}
+function msg(t){var b=$("cr");b.hidden=false;b.textContent=t+"\nSayt: "+location.origin+"\n(bosib nusxalang)";b.onclick=function(){try{navigator.clipboard.writeText(t+"\nSayt: "+location.origin)}catch(e){}}}
+function dr(){var q=$("q").value.trim().toLowerCase(),n=Date.now();$("ul").innerHTML=us.filter(function(x){return !q||x.u.indexOf(q)>-1}).map(function(x){var d=Math.ceil((x.exp-n)/864e5),u=esc(x.u);return '<div class="li"><div class="tx"><b>'+u+'</b><span>'+(d>0?d+" kun qoldi":"Muddati tugagan")+" · "+x.n+' ta test</span></div><button class="sm" data-a="x" data-u="'+u+'">+30</button><button class="sm" data-a="p" data-u="'+u+'">Parol</button><button class="sm" data-a="d" data-u="'+u+'">✕</button></div>'}).join("")||"<p>Hozircha yo'q.</p>"}
+function ld(){api("GET","/admin/users").then(function(j){us=j.users||[];dr()})}
+$("q").oninput=dr;$("ts").onclick=function(){asUser=true;home()};$("gn").onclick=function(){$("np").value=gp()};
+$("ul").onclick=function(ev){var t=ev.target.closest("button");if(!t)return;var u=t.dataset.u,a=t.dataset.a,P="/admin/users/"+encodeURIComponent(u);
+if(a=="x")api("POST",P+"/extend",{days:30}).then(ld);
+else if(a=="p"){var pw=gp();api("POST",P+"/password",{p:pw}).then(function(j){if(j.ok)msg("Login: "+u+"\nYangi parol: "+pw)})}
+else ask(u+" o'chirilsinmi?","Ha, o'chirish",function(){api("DELETE",P).then(ld)})};
+$("mk").onclick=function(){var l=$("nl").value.trim().toLowerCase(),pw=$("np").value.trim(),d=parseInt($("nd").value)||30;
+api("POST","/admin/users",{u:l,p:pw,days:d}).then(function(j){$("rs").textContent=j.ok?"":j.error;if(j.ok){msg("Login: "+l+"\nParol: "+pw+"\nAmal qilish: "+d+" kun");$("nl").value=$("np").value="";ld()}})};
+$("cpw").onclick=function(){api("POST","/admin/password",{old:$("op").value,new:$("npw").value}).then(function(j){$("pe").textContent=j.ok?"Parol o'zgartirildi. Qayta kiring.":j.error;if(j.ok)setTimeout(function(){put("yt_s",null);auth()},1200)})};
+ld()}
+
+function cat(ci){stop();who.innerHTML="";
+app.innerHTML='<div class="row"><h2>Belgilar lug\'ati</h2><button class="ghost" id="bk">Orqaga</button></div><div class="chips" style="margin-top:8px">'+C.map(function(c,i){return '<button class="chip'+(i==ci?' on':'')+'" data-c="'+i+'">'+c+'</button>'}).join("")+'</div><div class="grid">'+L.filter(function(x){return x[1]==ci}).map(function(x){return '<figure>'+G[x[0]]+'<figcaption>'+x[2]+'</figcaption></figure>'}).join("")+'</div>';
+tb("s");document.getElementById("bk").onclick=home;app.querySelectorAll("[data-c]").forEach(function(el){el.onclick=function(){cat(+el.dataset.c)}})}
+
+function home(){stop();var m=me();if(!m){auth();return}if(m.r=="admin"&&!asUser){admin();return}
+var b=m.u.best,g=function(k){return b[k]||0},tp=[0,1,2].every(function(i){return g("t"+i)>=80}),mx=g("mix")>=80,ex=!!b.examOk;
+var rd=Math.round(([0,1,2].reduce(function(a,i){return a+g("t"+i)},0)+g("mix")+(ex?100:0))/5);
+who.innerHTML=(m.r=="admin"?'<button class="ghost" id="pn" style="color:#fff">Panel</button> ':'')+'<button class="ghost" id="out" style="color:#fff">Chiqish</button>';
+document.getElementById("out").onclick=lo;if(m.r=="admin")document.getElementById("pn").onclick=function(){asUser=false;home()};
+function row(n,t,s,v,k,open,ok,btn){return '<div class="li k-'+k+(open?'':' lock')+'"><span class="nd'+(ok?' ok':'')+'">'+n+'</span><div class="tx"><b>'+t+'</b><span>'+s+'</span><i class="mb"><u style="width:'+(parseInt(v)||0)+'%"></u></i></div>'+(v?'<span class="pill'+(ok?' ok':'')+'">'+v+'</span>':'')+'<button class="sm" data-m="'+k+'"'+(open?'':' disabled')+'>'+btn+'</button></div>'}
+var h='<div class="hello"><div class="ring" style="--z:56px;--p:'+rd+'"><b style="font-size:14px">'+rd+'%</b></div><div><h2></h2><p style="margin:0">Tayyorlik'+(m.u.streak>1?' · 🔥 '+m.u.streak+' kun ketma-ket':'')+'</p></div><div class="st"><span>🔥 '+(m.u.streak||0)+' kun</span><span>🏁 '+([0,1,2].filter(function(i){return g("t"+i)>=80}).length+(mx?1:0)+(ex?1:0))+'/5 bosqich</span><span>❗ '+m.u.wrong.length+' xato</span></div></div>';
+var hr=new Date().getHours(),tdy=m.u.today&&m.u.today.d==new Date().toDateString()?m.u.today.n:0,gp=Math.min(tdy,20);h+='<div class="card goal"><div class="row"><b>Bugungi maqsad</b><span class="pill'+(gp>=20?' ok':'')+'">'+(gp>=20?"🎯 ":"")+gp+'/20 savol</span></div><div class="bar"><i style="width:'+gp*5+'%"></i></div></div>';var wc=m.u.wrong.length;
+if(wc)h+='<button class="pri" data-m="wrong" style="margin-bottom:6px">Xatolar ustida ishlash ('+wc+')</button>';
+h+='<div class="sec">Mavzular</div>';T.forEach(function(t,i){var v=g("t"+i),c=Q.filter(function(q){return q.t==i}).length;h+=row(["🚸","📘","🩺"][i],t,c+" ta savol, o'tish 80%",v+"%","t"+i,true,v>=80,v?"Qayta":"Boshlash")});
+h+='<div class="sec">Umumiy tayyorgarlik</div>';h+=row("🔀","Aralash savollar",tp?"Barcha mavzulardan":"1-3 bosqichni 80% bilan o'ting",g("mix")+"%","mix",tp,mx,"Boshlash");
+h+=row("🎓","Imtihon",mx?"20 savol, 20 daqiqa, 2 tagacha xato":"Aralashdan keyin ochiladi",b.exam==null?"":b.exam+"%","exam",mx,ex,"Boshlash");
+h+='<div class="sec">Qo\'shimcha</div>';h+=row("🚗","Qaysi mashina o'tadi?",SC.length+" ta chorraha: yodlash va mashq","","yol",true,false,"Ochish");h+=row("🪧","Belgilar lug'ati",L.length+" ta belgi","","signs",true,false,"Ochish");
+if(m.u.hist.length){h+='<div class="sec">Faoliyat</div><div class="card"><h2>So\'nggi natijalar</h2>';m.u.hist.slice(-4).reverse().forEach(function(x){h+='<div class="row small"><span>'+esc(x.t)+'</span><span>'+x.d+'</span><b>'+x.p+'%</b></div>'});h+='</div>'}
+
+app.innerHTML=h;app.querySelector("h2").textContent=(hr<5?"Xayrli tun":hr<12?"Xayrli tong":hr<18?"Xayrli kun":"Xayrli kech")+", "+m.u.name;
+app.querySelectorAll("[data-m]").forEach(function(el){el.onclick=function(){el.dataset.m=="signs"?cat(0):el.dataset.m=="yol"?ye():start(el.dataset.m)}});
+tb("h");}
+
+function ye(){stop();who.innerHTML="";
+var h='<div class="row"><h2>Qaysi mashina o\'tadi?</h2><button class="ghost" id="bk">Orqaga</button></div><div class="card"><h2>Ustunlik tartibi</h2><ol class="steps"><li><b>Maxsus signalli</b> mashina (tez yordam, o\'t o\'chirish)</li><li><b>Tartibga soluvchi</b> ishorasi va svetofor</li><li><b>Belgilar:</b> asosiy yo\'l ustun, «Yo\'l bering» va STOP bor tomon yo\'l beradi</li><li><b>Teng huquqli kesishma:</b> o\'ngdagiga yo\'l bering</li><li><b>Chapga burilish:</b> qarama-qarshidan to\'g\'ri ketayotganga yo\'l bering</li></ol><button class="pri" id="pr">Mashq qilish</button></div>';
+SC.forEach(function(x,i){var c=CL[x[1]];h+='<div class="card"><div class="sign big">'+G["sc"+i]+'</div><div class="win"><i style="background:'+c[0]+'"></i><b>Birinchi o\'tadi: '+c[1]+'</b></div><p>'+x[2]+'</p></div>'});
+app.innerHTML=h;tb("y");document.getElementById("bk").onclick=home;
+document.getElementById("pr").onclick=function(){run({key:"yol",title:"Yo'l berish mashqi",qs:shuf(Q.filter(function(q){return q.g&&q.g.slice(0,2)=="sc"})),save:true})}}
+function start(k){var m=me();
+if(k[0]=="t")run({key:k,title:T[+k[1]],qs:shuf(Q.filter(function(q){return q.t==+k[1]})),save:true});
+else if(k=="mix")run({key:k,title:"Aralash savollar",qs:shuf(Q),save:true});
+else if(k=="exam")run({key:k,title:"Imtihon",qs:shuf(Q).slice(0,20),save:true,exam:true,sec:1200});
+else if(k=="wrong")run({key:k,title:"Xatolar ustida ishlash",qs:shuf(Q.filter(function(q){return m.u.wrong.indexOf(q.id)>-1})),save:true})}
+
+function run(c){stop();if(!c.qs.length){home();return}
+var qs=c.qs.map(function(q){return{id:q.id,q:q.q,e:q.e,g:q.g,o:shuf(q.o.map(function(t,i){return{t:t,r:i==0}}))}}),i=0,ans=[],left=c.sec||0,st=0;
+var tf=function(){return Math.floor(left/60)+":"+("0"+left%60).slice(-2)};
+if(c.exam)timer=setInterval(function(){left--;var el=document.getElementById("tm");if(el)el.textContent=tf();if(left<=0)finish()},1000);
+function show(){var q=qs[i];
+app.innerHTML='<div class="row"><b></b><span><span id="sk" class="pill" hidden></span> <span id="tm" class="pill"></span> <button class="ghost" id="qx">Chiqish</button></span></div><div class="bar" aria-hidden="true"><i style="width:'+(i/qs.length*100)+'%"></i></div><div class="card"><h2></h2><div id="sg"></div><div id="os"></div><div id="ex"></div></div>';
+app.querySelector("b").textContent=c.title+" · "+(i+1)+"/"+qs.length;var tm=document.getElementById("tm");if(c.exam)tm.textContent=tf();else tm.hidden=true;
+app.querySelector("h2").textContent=q.q;
+document.getElementById("qx").onclick=function(){ask("Testdan chiqasizmi? Natija saqlanmaydi.","Ha, chiqish",function(){stop();c.save?home():auth()})};
+if(q.g)document.getElementById("sg").innerHTML='<div class="sign'+(q.g.slice(0,2)=="sc"?" big":"")+'" role="img" aria-label="Tasvir">'+G[q.g]+'</div>';
+var os=document.getElementById("os");
+q.o.forEach(function(o,k){var b=document.createElement("button");b.className="opt";b.innerHTML='<i class="lt">'+"ABC"[k]+'</i><span></span>';b.lastChild.textContent=o.t;
+if(c.exam&&ans[i]==k)b.classList.add("sel");
+b.onclick=function(){
+if(c.exam){ans[i]=k;show();return}
+if(ans[i]!=null)return;ans[i]=k;st=o.r?st+1:0;snd(o.r);try{navigator.vibrate&&navigator.vibrate(o.r?15:[40,40,40])}catch(e){}var sk=document.getElementById("sk");sk.hidden=st<2;sk.textContent="🔥 "+st+" ta ketma-ket";
+os.querySelectorAll(".opt").forEach(function(x,n){if(q.o[n].r)x.classList.add("right")});if(!o.r)b.classList.add("wrong");
+var ex=document.getElementById("ex");ex.innerHTML='<div class="expl"></div><button class="pri" id="nx"></button>';
+ex.firstChild.textContent=(o.r?"To'g'ri. ":"Noto'g'ri. ")+q.e;var nx=document.getElementById("nx");nx.textContent=i+1<qs.length?"Keyingi savol":"Natijani ko'rish";
+nx.onclick=function(){i++;i<qs.length?show():finish()};nx.focus()};os.appendChild(b)});
+if(c.exam)nav()}
+function nav(){var d=document.createElement("div");d.className="card";d.innerHTML='<div class="map"></div><div class="row" style="margin-top:8px"><button class="sm" id="pv">Oldingi</button><button class="sm" id="nt"></button></div>';
+var mp=d.firstChild;qs.forEach(function(q,n){var x=document.createElement("button");x.className="dot"+(ans[n]!=null?" dn":"")+(n==i?" cur":"");x.textContent=n+1;x.onclick=function(){i=n;show()};mp.appendChild(x)});
+app.appendChild(d);var pv=d.querySelector("#pv"),nt=d.querySelector("#nt"),last=i==qs.length-1;pv.disabled=i==0;pv.onclick=function(){i--;show()};
+nt.textContent=last?"Yakunlash":"Keyingi";nt.onclick=function(){if(!last){i++;show();return}var un=qs.filter(function(q,n){return ans[n]==null}).length;ask(un?un+" ta savol javobsiz. Yakunlaysizmi?":"Imtihonni yakunlaysizmi?","Yakunlash",finish)}}
+function finish(){stop();var bad=[];qs.forEach(function(q,n){if(ans[n]==null||!q.o[ans[n]].r)bad.push(q.id)});
+var w=bad.length,p=Math.round((qs.length-w)/qs.length*100),pass=c.exam?w<=2:p>=80;
+if(c.save){var m=me(),u=m.u,k=c.key;
+if(k=="exam"){u.best.exam=Math.max(u.best.exam||0,p);if(pass)u.best.examOk=1}else if(k!="wrong")u.best[k]=Math.max(u.best[k]||0,p);
+qs.forEach(function(q){var ix=u.wrong.indexOf(q.id),b=bad.indexOf(q.id)>-1;if(b&&ix<0)u.wrong.push(q.id);if(!b&&ix>-1)u.wrong.splice(ix,1)});
+var td=new Date().toDateString();if(u.last!=td){u.streak=u.last==new Date(Date.now()-864e5).toDateString()?(u.streak||0)+1:1;u.last=td}
+u.today={d:td,n:(u.today&&u.today.d==td?u.today.n:0)+qs.length};u.hist.push({t:c.title,p:p,d:new Date().toLocaleDateString("uz-UZ")});u.hist=u.hist.slice(-30);save(m.e,u)}
+var h='<div class="card" style="text-align:center"><div class="ring" style="--p:'+p+';--rc:var(--'+(pass?'ok':'bad')+');--rb:var(--card);margin:4px auto 12px;--z:120px"><b style="font-size:28px">'+p+'%</b></div><h2>'+(pass?"🎉 O'tdingiz":"💪 Hali o'tmadingiz")+'</h2><p>'+(qs.length-w)+" ta to'g'ri, "+w+' ta xato.'+(c.exam?" O'tish uchun 2 tadan ko'p bo'lmagan xato.":" O'tish uchun 80% kerak.")+'</p>';
+if(!c.save)h+='<p>To\'liq kirish: @rustamoveu, 1 oy 19 000 so\'m.</p>';
+var rv='';qs.forEach(function(q){if(bad.indexOf(q.id)>-1){rv+='<div class="expl" style="text-align:left"><b>'+esc(q.q)+'</b><br>To\'g\'ri javob: '+esc(q.o.filter(function(x){return x.r})[0].t)+'</div>'}});
+if(rv)h+='<h2>Xatolar tahlili</h2>'+rv;
+h+='<button class="wide" id="rt" style="margin-top:10px">Qayta urinish</button><button class="pri" id="bk" style="margin-top:6px">'+(c.save?"Bosh sahifaga":"Kirish sahifasiga")+'</button></div>';
+app.innerHTML=h;document.getElementById("bk").onclick=function(){c.save?home():auth()};document.getElementById("rt").onclick=function(){run({key:c.key,title:c.title,qs:shuf(c.qs),save:c.save,exam:c.exam,sec:c.sec})};if(pass)conf()}
+show()}
+var ac;function snd(ok){if(pf.mu)return;try{var A=window.AudioContext||window.webkitAudioContext;ac=ac||new A();var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.connect(g);g.connect(ac.destination);o.frequency.setValueAtTime(ok?660:200,t);if(ok)o.frequency.setValueAtTime(880,t+.09);g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.26)}catch(e){}}
+function conf(){var w=document.createElement("div");w.className="cf";var cl=["#FFC21A","#12A66A","#4C8DFF","#E0443E","#fff"];for(var i=0;i<36;i++){var p=document.createElement("i");p.style.cssText="left:"+Math.random()*100+"%;background:"+cl[i%5]+";animation-delay:"+Math.random()*.6+"s;animation-duration:"+(1.6+Math.random()*1.4)+"s;transform:rotate("+Math.random()*360+"deg)";w.appendChild(p)}document.body.appendChild(w);setTimeout(function(){w.remove()},3500)}
+if(me())home();else auth();
+</script></body></html>
