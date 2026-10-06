@@ -71,5 +71,46 @@ var x=o.onExit;o.onExit=function(){try{document.fullscreenElement&&document.exit
 var n=3;ov.innerHTML='<div class="bfn">3</div>';
 var t=setInterval(function(){n--;if(n>0){ov.firstChild.textContent=n;return}clearInterval(t);ov.remove();s0(o)},750)}};
 
+/* Savollar aylanishi: imtihonda har safar 20 ta yangi savol, yarim qolgan testni davom ettirish */
+var ids=function(a){return a.map(function(q){return q.id})};
+function pool(k,u){
+if(k=="exam"||k=="dmix"||k=="mix")return Q;
+if(k=="dsign")return Q.filter(function(q){return q.t==0});
+if(k[0]=="t")return Q.filter(function(q){return q.t==+k[1]});
+if(k=="wrong")return Q.filter(function(q){return u.wrong.indexOf(q.id)>-1});
+return null}
+var run0=run;
+run=function(c){
+var m=me();if(!m||!c.save)return run0(c);
+var u=m.u,k=c.key,P=pool(k,u);if(!P||!P.length)return run0(c);
+u.seen=u.seen||{};u.sess=u.sess||{};u.done=u.done||[];
+if(c.exam){
+var sn=u.seen[k]||[],fr=P.filter(function(q){return sn.indexOf(q.id)<0});
+if(fr.length<20){sn=[];fr=P}
+var pk=shuf(fr).slice(0,20);
+u.seen[k]=sn.concat(ids(pk));
+pk.forEach(function(q){if(u.done.indexOf(q.id)<0)u.done.push(q.id)});
+save(m.e,u);c.qs=pk;return run0(c)}
+var s=u.sess[k],rest=[];
+if(s)rest=s.ids.filter(function(i){return s.d.indexOf(i)<0&&Q[i]}).map(function(i){return Q[i]});
+if(rest.length){c.qs=rest;c.title=c.title+" (davomi)"}
+else{var o=shuf(P);u.sess[k]={ids:ids(o),d:[]};save(m.e,u);c.qs=o}
+return run0(c)};
+var rec0=rec;
+rec=function(c,list){rec0(c,list);
+var m=me();if(!m||!c.save||!list.length)return;
+var u=m.u,s=u.sess&&u.sess[c.key];u.done=u.done||[];
+list.forEach(function(x){if(u.done.indexOf(x.id)<0)u.done.push(x.id);if(s&&!c.exam&&s.d.indexOf(x.id)<0)s.d.push(x.id)});
+if(s&&!c.exam&&s.d.length>=s.ids.length)delete u.sess[c.key];
+save(m.e,u)};
+var home0=home;
+home=function(){home0();
+var m=me();if(!m||(m.r=="admin"&&!asUser))return;
+var u=m.u,n=Q.length,d=(u.done||[]).filter(function(i){return i<n}).length,ss=u.sess||{};
+var el=document.createElement("div");el.className="card goal";
+el.innerHTML='<div class="row"><b>Umumiy progress</b><span class="pill">'+d+' / '+n+' savol</span></div><div class="bar"><i style="width:'+Math.round(d/n*100)+'%"></i></div>';
+var sec=app.querySelector(".sec");sec?app.insertBefore(el,sec):app.appendChild(el);
+Object.keys(ss).forEach(function(k){var b=app.querySelector('[data-m="'+k+'"]');if(b&&!b.disabled&&ss[k].d.length<ss[k].ids.length){b.textContent="Davom ("+ss[k].d.length+"/"+ss[k].ids.length+")"}})};
+
 if(me())home();else auth();
 })();
