@@ -19,9 +19,12 @@ Birinchi ishga tushganda konsolda **admin login va paroli** chiqadi (`ADMIN_USER
 - **Internetdan:** Render / Railway / VPS ga joylang (Start: `node server.js`) va doimiy disk (`DATA_DIR`) ulang, aks holda ma'lumotlar o'chib ketadi. Vaqtincha uchun: `cloudflared tunnel --url http://localhost:3000`.
 - Internetga ochishda HTTPS ishlating (hosting buni o'zi beradi).
 
-## Belgilar bazasi va chorrahalar
-`L` massivi: `[id, guruh, nom, svg]`: 139 ta belgi, 7 guruh (ogohlantiruvchi, imtiyozli, taqiqlovchi, buyuruvchi, axborot, servis, qo'shimcha). Har bir belgi uchun "Bu belgi nimani bildiradi?" savoli avtomatik yaratiladi. Yangi belgi qo'shish uchun `L` ga qator qo'shing.
-`SC` massivi: `[[[yo'l, harakat, rang, belgi?]...], g'olib rang, izoh]`. Yo'l 0..3 (pastdan soat strelkasi bo'yicha), harakat `s` to'g'ri, `l` chapga, `r` o'ngga; belgi: `main`, `yield`, `stop`, `lampg`, `lampr`.
+## Prava topshirish (demo)
+Pastki menyuda **🚦 Prava** bo'limi: 1-bosqich nazariy imtihon (belgilar testi va aralash test), 2-bosqich **avtodrom simulyatori** (Cobalt/Gentra/Malibu, imtihon yoki mashq rejimi).
+- Telefonda: rul (barmoq bilan aylantiring), gaz/tormoz pedallari, R/1/2 uzatma, ◀ ▶ burilish chirog'i. Yotiq holatda qulayroq.
+- Kompyuterda: A/D yoki ←/→ rul, W/S yoki ↑/↓ gaz-tormoz, probel tormoz, R/1/2 uzatma, Q/E chiroq, Esc pauza.
+- Xatolar: tezlikni oshirish (+5), chiroqsiz burilish (+5), STOP da to'xtamaslik (+10), teskari yurish (+20), yo'ldan chiqish (+100). 100 balldan oshsa yoki 5 daqiqa tugasa imtihondan o'tolmaysiz.
+- Barcha natijalar (testlar va avtodrom) o'quvchi hisobida serverda saqlanadi.
 
 ## Savollar
 Savollar `index.html` ichidagi `Q` massivida: `[bo'lim, savol, [to'g'ri, xato, xato], izoh, belgi]`. Birinchi variant to'g'ri, ko'rsatishda aralashtiriladi.
