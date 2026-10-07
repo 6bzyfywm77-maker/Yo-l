@@ -19,13 +19,6 @@ Birinchi ishga tushganda konsolda **admin login va paroli** chiqadi (`ADMIN_USER
 - **Internetdan:** Render / Railway / VPS ga joylang (Start: `node server.js`) va doimiy disk (`DATA_DIR`) ulang, aks holda ma'lumotlar o'chib ketadi. Vaqtincha uchun: `cloudflared tunnel --url http://localhost:3000`.
 - Internetga ochishda HTTPS ishlating (hosting buni o'zi beradi).
 
-## Prava topshirish (demo)
-Pastki menyuda **🚦 Prava** bo'limi: 1-bosqich nazariy imtihon (belgilar testi va aralash test), 2-bosqich **avtodrom simulyatori** (Cobalt/Gentra/Malibu, imtihon yoki mashq rejimi).
-- Telefonda: rul (barmoq bilan aylantiring), gaz/tormoz pedallari, R/1/2 uzatma, ◀ ▶ burilish chirog'i. Yotiq holatda qulayroq.
-- Kompyuterda: A/D yoki ←/→ rul, W/S yoki ↑/↓ gaz-tormoz, probel tormoz, R/1/2 uzatma, Q/E chiroq, Esc pauza.
-- Xatolar: tezlikni oshirish (+5), chiroqsiz burilish (+5), STOP da to'xtamaslik (+10), teskari yurish (+20), yo'ldan chiqish (+100). 100 balldan oshsa yoki 5 daqiqa tugasa imtihondan o'tolmaysiz.
-- Barcha natijalar (testlar va avtodrom) o'quvchi hisobida serverda saqlanadi.
-
 ## Savollar
 Savollar `index.html` ichidagi `Q` massivida: `[bo'lim, savol, [to'g'ri, xato, xato], izoh, belgi]`. Birinchi variant to'g'ri, ko'rsatishda aralashtiriladi.
 
@@ -39,3 +32,9 @@ git remote add origin https://github.com/USERNAME/yol-test.git
 git push -u origin main
 ```
 `data/` papkasi `.gitignore` da: o'quvchilar va parollar GitHub ga chiqmaydi.
+
+## Yangiliklar
+- Telefon va kompyuter uchun moslashuvchan dizayn.
+- Testlar avtomatik saqlanadi: chiqib ketsangiz ham, qaytganda "Davom" tugmasi qolgan joydan boshlaydi.
+- Savollar xaritasi: togri (yashil) va xato (qizil) javoblar korinadi.
+- "Prava topshirish (demo)": 3D avtodrom (rul, gaz/tormoz, R/1/2 uzatma, kamar, 12 harakat, ball, xarita). Kompyuterda: strelkalar/WASD, 1/2/R, B, probel.
