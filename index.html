@@ -561,26 +561,22 @@ else if(t=="chev"){g.fillStyle="#fff";g.fillRect(px-R*1.2,cy-R*.55,R*2.4,R*1.1);
 else if(t=="park"){g.fillStyle="#1565C0";g.fillRect(px-R*.9,cy-R*.9,R*1.8,R*1.8);g.fillStyle="#fff";g.font="800 "+R*1.4+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText("P",px,cy+R*.05)}}
 function frame(){
 var cI=Math.floor(S.pos/SL)%N,off=S.pos%SL,hor=H*.42,P=[],x=0,dx=-cv[cI]*.45*(off/SL);
-var sky=g.createLinearGradient(0,0,0,hor);sky.addColorStop(0,"#5BA8F0");sky.addColorStop(1,"#CFE8FF");g.fillStyle=sky;g.fillRect(0,0,W,hor+2);
-g.fillStyle="#4E9A3E";g.fillRect(0,hor,W,H-hor);
+var sky=g.createLinearGradient(0,0,0,hor);sky.addColorStop(0,"#5BA8F0");sky.addColorStop(1,"#CFE8FF");g.fillStyle=sky;g.fillRect(0,0,W,hor+2);var SK=window.SK;if(SK&&SK.sky.naturalWidth){var sh=W*.175;g.drawImage(SK.sky,0,hor-sh+2,W,sh)}
+g.fillStyle="#6f7378";g.fillRect(0,hor,W,H-hor);
 for(var n=0;n<VIS;n++){var z=n*SL-off+CZ,sc=D/z;P.push({x:W/2+sc*(x-S.x*RW)*W/2,y:hor+sc*CH*H/2*1.0,w:sc*RW*W/2,sc:sc});x+=dx;dx+=cv[(cI+n)%N]*.45}
 for(var n=VIS-2;n>=0;n--){var a=P[n],b=P[n+1],i=(cI+n),e=Math.floor(i/4)%2,ed=i>=N-35&&i<=N-5;
-quad(W/2,b.y,W,W/2,a.y,W,e?"#4E9A3E":"#468F38");
-quad(b.x,b.y,b.w*1.18,a.x,a.y,a.w*1.18,Math.floor(i/3)%2?"#F5C400":"#fff");
-quad(b.x,b.y,b.w,a.x,a.y,a.w,"#3B424D");
+quad(W/2,b.y,W,W/2,a.y,W,e?"#6f7378":"#6a6e73");
+quad(b.x,b.y,b.w*1.18,a.x,a.y,a.w*1.18,Math.floor(i/3)%2?"#F5C400":"#202020");
+quad(b.x,b.y,b.w,a.x,a.y,a.w,"#55585d");
 if(i%6<3)quad(b.x,b.y,b.w*.02,a.x,a.y,a.w*.02,"#fff");
 if(i==Math.floor(S.pos/SL)+0&&0){}
 Z.forEach(function(z){if((z.k=="ped"||z.k=="stop")&&i==z.a){for(var k=-5;k<5;k++)quad(b.x+k*b.w*.19,b.y,b.w*.085,a.x+k*a.w*.19,a.y,a.w*.085,z.k=="ped"?"#fff":"#E8E8E8");if(z.k=="stop")quad(b.x,b.y,b.w,a.x,a.y,a.w*1.02,"rgba(255,255,255,.9)")}});
 if(i==2||ed)quad(b.x,b.y,b.w,a.x,a.y,a.w,i==2?"rgba(255,255,255,.85)":"rgba(255,200,0,.5)");
 tr.forEach(function(t){if(t[0]==i%N&&i<N)sprite(t[2],a.x,a.y,a.sc,t[1],t[3])});
 if(i%20==0&&i<N)for(var sd=-1;sd<=1;sd+=2){var tx=a.x+sd*a.sc*RW*2.4*W/2,th=a.sc*W*14;if(th>5){g.fillStyle="#5a3d1e";g.fillRect(tx-th*.03,a.y-th*.3,th*.06,th*.3);g.fillStyle="#2E7D32";g.beginPath();g.moveTo(tx,a.y-th);g.lineTo(tx+th*.22,a.y-th*.25);g.lineTo(tx-th*.22,a.y-th*.25);g.fill()}}}
+if(i%3==0&&i<N)for(var sd2=-1;sd2<=1;sd2+=2){var kx=a.x+sd2*a.w*1.34,kh2=a.w*.13;if(kh2>2){g.fillStyle="#FF6A00";g.beginPath();g.moveTo(kx,a.y-kh2);g.lineTo(kx+kh2*.38,a.y);g.lineTo(kx-kh2*.38,a.y);g.fill();g.fillStyle="#fff";g.fillRect(kx-kh2*.2,a.y-kh2*.55,kh2*.4,kh2*.16)}}
 /* mashina (orqadan) */
-var cx=W/2+ang/120*W*.02,cw=Math.min(W,H*1.6)*.19,cy=H*.93,ch=cw*.7;g.save();g.translate(cx,cy);g.rotate(ang/120*.03);
-g.fillStyle="rgba(0,0,0,.35)";g.beginPath();g.ellipse(0,ch*.1,cw*.62,ch*.18,0,0,7);g.fill();
-g.fillStyle="#111";g.fillRect(-cw*.58,-ch*.5,cw*.16,ch*.5);g.fillRect(cw*.42,-ch*.5,cw*.16,ch*.5);
-g.fillStyle=car[1];g.beginPath();g.moveTo(-cw*.55,0);g.lineTo(-cw*.5,-ch*.62);g.lineTo(-cw*.3,-ch*.95);g.lineTo(cw*.3,-ch*.95);g.lineTo(cw*.5,-ch*.62);g.lineTo(cw*.55,0);g.closePath();g.fill();
-g.fillStyle="#2a3744";g.beginPath();g.moveTo(-cw*.33,-ch*.62);g.lineTo(-cw*.24,-ch*.88);g.lineTo(cw*.24,-ch*.88);g.lineTo(cw*.33,-ch*.62);g.fill();
-g.fillStyle=S.brk?"#FF1744":"#B71C1C";g.fillRect(-cw*.5,-ch*.3,cw*.2,ch*.14);g.fillRect(cw*.3,-ch*.3,cw*.2,ch*.14);g.restore();
+var cx=W/2+ang/120*W*.02,cw=Math.min(W,H*1.6)*.19,cy=H*.95,ch=cw*.7;g.save();g.translate(cx,cy);g.rotate(ang/120*.03);if(SK&&SK.car.naturalWidth){var kw=cw*1.45,kh=kw*SK.car.naturalHeight/SK.car.naturalWidth;g.drawImage(SK.car,-kw/2,-kh,kw,kh);if(S.brk){g.fillStyle="rgba(255,30,30,.55)";g.fillRect(-kw*.4,-kh*.62,kw*.2,kh*.1);g.fillRect(kw*.2,-kh*.62,kw*.2,kh*.1)}}g.restore();
 /* xarita */
 mm.clearRect(0,0,110,80);mm.fillStyle="rgba(15,25,40,.8)";mm.fillRect(0,0,110,80);mm.strokeStyle="#6b7a8c";mm.lineWidth=3;mm.beginPath();var sx=96/(mx1-mx0||1),sy=66/(my1-my0||1),k=Math.min(sx,sy);map.forEach(function(p,i){var X=7+(p[0]-mx0)*k,Y=7+(p[1]-my0)*k;i?mm.lineTo(X,Y):mm.moveTo(X,Y)});mm.stroke();var q=map[Math.min(N-1,cI)];mm.fillStyle="#2FCB86";mm.beginPath();mm.arc(7+(q[0]-mx0)*k,7+(q[1]-my0)*k,4,0,7);mm.fill()}
 /* mantiq */
