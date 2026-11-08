@@ -1,0 +1,20 @@
+/* YO'L TEST: belgilar 3-to'plami (9 ta). Nomlarni rasmiy YHQ ro'yxati bilan tekshiring. */
+(function(){
+var S='stroke-linecap="round" stroke-linejoin="round"';
+var i5=function(d,c,w){return '<path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="'+(w||6)+'" '+S+'/>'};
+var F='fill="'+INK+'"';
+var X=[
+["prio2",1,"Qarama-qarshi harakatda ustunlik",'<rect x="6" y="6" width="88" height="88" rx="8" fill="#fff" stroke="#fff"/><rect x="10" y="10" width="80" height="80" rx="6" fill="#fff" stroke="'+BLU+'" stroke-width="5"/><polygon points="38,16 54,44 44,44 44,84 32,84 32,44 22,44" fill="'+INK+'"/><polygon points="62,84 78,56 68,56 68,16 56,16 56,56 46,56" fill="'+RED+'" transform="translate(6,0)"/>'],
+["giveon",1,"Qarama-qarshi harakatda yo'l bering",'<rect x="6" y="6" width="88" height="88" rx="8" fill="#fff" stroke="'+RED+'" stroke-width="8"/><polygon points="36,18 52,46 42,46 42,84 30,84 30,46 20,46" fill="'+RED+'"/><polygon points="72,84 88,56 78,56 78,18 66,18 66,56 56,56" fill="'+INK+'" transform="translate(-6,0)"/>'],
+["minend",3,"Eng kam tezlik cheklovi tugashi",bc(tx("30",36,W)+'<path d="M16 84L84 16" stroke="'+RED+'" stroke-width="7"/>')],
+["airport",4,"Aeroport",bs('<path d="M50 18L56 42L82 56V64L56 58L56 74L64 80V86L50 82L36 86V80L44 74L44 58L18 64V56L44 42Z" fill="#fff"/>')],
+["rail",4,"Temir yo'l bekati",bs('<rect x="26" y="24" width="48" height="40" rx="8" fill="#fff"/><rect x="32" y="30" width="36" height="14" rx="3" fill="'+BLU+'"/><circle cx="38" cy="54" r="4" fill="'+BLU+'"/><circle cx="62" cy="54" r="4" fill="'+BLU+'"/>'+i5("M30 78L40 66M70 78L60 66",W,5))],
+["wash",4,"Avtomobil yuvish",bs('<rect x="22" y="54" width="56" height="16" rx="6" fill="#fff"/><path d="M32 54L40 42H60L68 54Z" fill="#fff"/><circle cx="34" cy="72" r="6" fill="#fff" stroke="'+BLU+'" stroke-width="3"/><circle cx="66" cy="72" r="6" fill="#fff" stroke="'+BLU+'" stroke-width="3"/><circle cx="34" cy="26" r="3" fill="#fff"/><circle cx="50" cy="22" r="3" fill="#fff"/><circle cx="66" cy="26" r="3" fill="#fff"/>')],
+["disab",4,"Nogironlar to'xtab turish joyi",bs('<circle cx="46" cy="24" r="7" fill="#fff"/>'+i5("M46 34V56H64L70 74M46 44H62",W,6)+'<circle cx="44" cy="68" r="14" fill="none" stroke="#fff" stroke-width="6"/>')],
+["picnic",4,"Dam olish joyi",bs('<polygon points="50,18 78,44 22,44" fill="#fff"/><rect x="46" y="44" width="8" height="30" fill="#fff"/><rect x="24" y="60" width="52" height="7" fill="#fff"/><rect x="28" y="67" width="6" height="14" fill="#fff"/><rect x="66" y="67" width="6" height="14" fill="#fff"/>')],
+["subway",4,"Yer osti piyodalar o'tish joyi",bs('<polygon points="50,14 86,70 14,70" fill="#fff"/>'+i5("M30 62L40 62L40 70L50 70L50 78",BLU,5)+'<circle cx="58" cy="44" r="5" fill="'+BLU+'"/>'+i5("M58 52V62",BLU,5))]
+];
+X.forEach(function(x){L.push(x);G[x[0]]=sg(x[3])});
+X.forEach(function(x){var d=shuf(L.filter(function(y){return y[0]!=x[0]&&y[2]!=x[2]})).sort(function(p,q){return (q[1]==x[1])-(p[1]==x[1])}).slice(0,2);
+Q.push({t:0,q:"Bu belgi nimani bildiradi?",o:[x[2]].concat(d.map(function(y){return y[2]})),e:"Bu \u00ab"+x[2]+"\u00bb belgisi, \u00ab"+C[x[1]]+"\u00bb guruhiga kiradi.",g:x[0],id:Q.length})});
+})();
