@@ -38,3 +38,6 @@ git push -u origin main
 - Testlar avtomatik saqlanadi: chiqib ketsangiz ham, qaytganda "Davom" tugmasi qolgan joydan boshlaydi.
 - Savollar xaritasi: togri (yashil) va xato (qizil) javoblar korinadi.
 - "Prava topshirish (demo)": 3D avtodrom (rul, gaz/tormoz, R/1/2 uzatma, kamar, 12 harakat, ball, xarita). Kompyuterda: strelkalar/WASD, 1/2/R, B, probel.
+- v2: `signs-extra` fayli `signs-extra.js` deb to'g'ri nomlandi (34 belgi endi yuklanadi). `signs-more.js` (+25 belgi), `priority-pro.js` (rasmdagidek chorraha chizmasi + 5 ta murakkab holat). Server uchalasini avtomatik ulaydi.
+- v3: `autodrom3d.js` – Three.js 3D avtodrom (Amaliy imtihon 3D): Cobalt, slalom, to'xtash chizig'i, orqaga parkovka, jarima, hisobot.
+- v4: signs-more2.js (+9 belgi), avtodromda burilish chirog'i, qo'l tormozi, faralar, orqa kamera, signal jarimasi.
