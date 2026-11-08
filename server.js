@@ -17,9 +17,10 @@ const J=(res,c,o)=>{res.writeHead(c,{'Content-Type':'application/json'});res.end
 const body=req=>new Promise(r=>{let d='';req.on('data',c=>{d+=c;if(d.length>2e5)req.destroy()});req.on('end',()=>{try{r(JSON.parse(d||'{}'))}catch{r({})}})});
 const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.svg':'image/svg+xml','.json':'application/json'};
 function stat(p,res){const f=[path.join(__dirname,'index.html'),path.join(PUB,'index.html')].find(x=>fs.existsSync(x));
-if(p==='/signs-extra.js'){const g=[path.join(__dirname,'signs-extra.js'),path.join(PUB,'signs-extra.js')].find(x=>fs.existsSync(x));if(g){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});return fs.createReadStream(g).pipe(res)}}
+const EX=['signs-more.js','signs-more2.js','priority-pro.js','signs-extra.js','autodrom3d.js'];
+if(p[0]==='/'&&EX.indexOf(p.slice(1))>-1){const g=[path.join(__dirname,p.slice(1)),path.join(PUB,p.slice(1))].find(x=>fs.existsSync(x));if(g){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});return fs.createReadStream(g).pipe(res)}}
 if(p!=='/'&&p!=='/index.html'||!f){res.writeHead(404);return res.end('404')}
-res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});res.end(fs.readFileSync(f,'utf8').replace('</body>','<script src="/signs-extra.js"></script></body>'))}
+res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});res.end(fs.readFileSync(f,'utf8').replace('</body>',EX.map(n=>'<script src="/'+n+'"></script>').join('')+'</body>'))}
 const lim=new Map(),DAY=864e5,NAME=/^[a-z0-9_.]{3,30}$/;
 http.createServer(async(req,res)=>{
 const p=new URL(req.url,'http://x').pathname,m=req.method;
